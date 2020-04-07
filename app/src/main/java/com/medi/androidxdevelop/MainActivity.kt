@@ -3,6 +3,7 @@ package com.medi.androidxdevelop
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.medi.androidxdevelop.activitys.AppViewScreenActivity
 import com.medi.androidxdevelop.mvvm.MvvmActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -13,6 +14,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         btn_mvvm.setOnClickListener {
             startActivity(Intent(this,MvvmActivity::class.java))
+        }
+        btn_screen.setOnClickListener {
+            startActivity(Intent(this,AppViewScreenActivity::class.java))
         }
     }
 }
