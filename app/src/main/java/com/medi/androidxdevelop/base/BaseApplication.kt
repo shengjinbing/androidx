@@ -1,6 +1,8 @@
 package com.medi.androidxdevelop.base
 
+import android.app.Application
 import com.medi.track.TrackApplication
+import sdk.SensorsDataAPI
 
 /**
  * Created by lixiang on 2020/4/1
@@ -12,5 +14,16 @@ class BaseApplication: TrackApplication() {
         ApplicationContext.application = this
         ApplicationContext.context = this
 
+        //ASM
+        initASMSensorsDataAPI(this)
+    }
+
+    /**
+     * 初始化埋点 SDK
+     *
+     * @param application Application
+     */
+    private  fun initASMSensorsDataAPI(application: Application) {
+        SensorsDataAPI.init(application)
     }
 }
