@@ -1,4 +1,4 @@
-package sdk;
+package com.sensorsdata.analytics.android.sdk;
 
 import android.app.Application;
 import android.util.Log;

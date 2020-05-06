@@ -2,7 +2,7 @@ package com.medi.androidxdevelop.base
 
 import android.app.Application
 import com.medi.track.TrackApplication
-import sdk.SensorsDataAPI
+import com.sensorsdata.analytics.android.sdk.SensorsDataAPI
 
 /**
  * Created by lixiang on 2020/4/1

@@ -17,7 +17,7 @@
 
 package com.sensorsdata.analytics.android.plugin
 
-import jdk.internal.org.objectweb.asm.Opcodes
+import org.objectweb.asm.Opcodes
 
 class SensorsAnalyticsHookConfig {
     /**
@@ -42,7 +42,7 @@ class SensorsAnalyticsHookConfig {
                 'trackViewOnClick',
                 '(Landroid/view/View;)V',
                 1, 1,
-                [Opcodes.ALOAD])
+                [groovyjarjarasm.asm.Opcodes.ALOAD])
         LAMBDA_METHODS.put(onCheckedChanged.parent + onCheckedChanged.name + onCheckedChanged.desc, onCheckedChanged)
 
         SensorsAnalyticsMethodCell onRatingChanged = new SensorsAnalyticsMethodCell(
