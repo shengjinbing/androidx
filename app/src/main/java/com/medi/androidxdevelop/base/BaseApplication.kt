@@ -8,7 +8,7 @@ import com.sensorsdata.analytics.android.sdk.SensorsDataAPI
  * Created by lixiang on 2020/4/1
  * Describe:
  */
-class BaseApplication: TrackApplication() {
+class BaseApplication: Application(){
     override fun onCreate() {
         super.onCreate()
         ApplicationContext.application = this
