@@ -25,13 +25,17 @@ class SensorsAnalyticsTransform extends Transform {
         this.sensorsAnalyticsExtension = sensorsAnalyticsExtension
     }
 
+    /**
+     * 代码Transform对应Task对应的名称
+     * @return
+     */
     @Override
     String getName() {
         return "sensorsAnalytics"
     }
 
     /**
-     * 需要处理的数据类型，有两种枚举类型
+     * 需要处理的数据类型，目前支持两种数据类型，有两种枚举类型
      * CLASSES 代表处理的 java 的 class 文件，RESOURCES 代表要处理 java 的资源
      * @return
      */
@@ -56,6 +60,10 @@ class SensorsAnalyticsTransform extends Transform {
         return TransformManager.SCOPE_FULL_PROJECT
     }
 
+    /**
+     * 是否增量构建
+     * @return
+     */
     @Override
     boolean isIncremental() {
         return false

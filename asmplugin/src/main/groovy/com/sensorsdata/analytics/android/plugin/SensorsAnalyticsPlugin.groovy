@@ -11,6 +11,7 @@ class SensorsAnalyticsPlugin implements Plugin<Project> {
 
         SensorsAnalyticsExtension extension = project.extensions.create("sensorsAnalytics", SensorsAnalyticsExtension)
 
+        //关闭埋点插件
         boolean disableSensorsAnalyticsPlugin = false
         Properties properties = new Properties()
         if (project.rootProject.file('gradle.properties').exists()) {

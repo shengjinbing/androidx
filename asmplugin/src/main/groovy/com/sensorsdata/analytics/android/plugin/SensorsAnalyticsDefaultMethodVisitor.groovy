@@ -3,9 +3,12 @@ package com.sensorsdata.analytics.android.plugin
 import org.objectweb.asm.*
 import org.objectweb.asm.commons.AdviceAdapter
 
+/**
+ * 父类实现MethodVisitor接口，主要负责"拜访"方法的信息，用来进行具体的方法字节码操作。
+ */
 class SensorsAnalyticsDefaultMethodVisitor extends AdviceAdapter {
 
-   SensorsAnalyticsDefaultMethodVisitor(MethodVisitor mv, int access, String name, String desc) {
+    SensorsAnalyticsDefaultMethodVisitor(MethodVisitor mv, int access, String name, String desc) {
         super(Opcodes.ASM6, mv, access, name, desc)
     }
 

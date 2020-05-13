@@ -7,6 +7,9 @@ import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 
+/**
+ * 主要负责"拜访"类成员信息。其中包括标记在类上的注解、类的构造方法、类的字段、类的方法、静态代码块等。
+ */
 class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
     private final
     static String SDK_API_CLASS = "com/sensorsdata/analytics/android/sdk/SensorsDataAutoTrackHelper"
@@ -28,12 +31,51 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
         methodVisitor.visitMethodInsn(opcode, owner, methodName, methodDesc, false)
     }
 
+    /**
+     * 可以拿到类的详细信息，然后对满足条件的类进行行过滤
+     * @param version JDK的版本
+     * @param access 类的修饰符，修饰符中以"ACC_"开头的常量，ACC_PUBLIC、ACC_ENUM
+     * @param name 代表类的名称。通常以包名+类名来表示类，比如：a.b.c.MyClass,但是在字节码中是以路径的方式表示，即：a/b/c/MyClass.
+     *             两种方式都不需要写.class扩展名。
+     * @param signature 泛型类型
+     * @param superName 当前类继承的父类。
+     * @param interfaces 表示当前类实现的接口列表。
+     */
     @Override
     void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
         super.visit(version, access, name, signature, superName, interfaces)
         mInterfaces = interfaces
     }
 
+    /**
+     * 访问内部类信息
+     * @param name
+     * @param outerName
+     * @param innerName
+     * @param access
+     */
+    @Override
+    void visitInnerClass(String name, String outerName, String innerName, int access) {
+        super.visitInnerClass(name, outerName, innerName, access)
+    }
+
+    /**
+     * 遍历类中成员信息结束
+     */
+    @Override
+    void visitEnd() {
+        super.visitEnd()
+    }
+
+   /**
+     * 拿到需要修改的方法，然后进行修改操作
+     * @param access 方法修饰符
+     * @param name 方法名称
+     * @param desc 方法签名
+     * @param signature 泛型
+     * @param exceptions 异常
+     * @return
+     */
     @Override
     MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
         MethodVisitor methodVisitor = super.visitMethod(access, name, desc, signature, exceptions)
@@ -68,6 +110,9 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
                 }
             }
 
+            /**
+             * 进入方法插入字节码
+             */
             @Override
             protected void onMethodEnter() {
                 super.onMethodEnter()
@@ -109,6 +154,7 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
 
                 if (nameDesc == 'onContextItemSelected(Landroid/view/MenuItem;)Z' ||
                         nameDesc == 'onOptionsItemSelected(Landroid/view/MenuItem;)Z') {
+                    //带有参数的字节码指令
                     methodVisitor.visitVarInsn(ALOAD, 0)
                     methodVisitor.visitVarInsn(ALOAD, 1)
                     methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Ljava/lang/Object;Landroid/view/MenuItem;)V", false)
@@ -173,6 +219,12 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
                 }
             }
 
+            /**
+             * 可以在这里通过注解的方式操作字节码
+             * @param des
+             * @param visible
+             * @return
+             */
             @Override
             AnnotationVisitor visitAnnotation(String s, boolean b) {
                 if (s == 'Lcom/sensorsdata/analytics/android/sdk/SensorsDataTrackViewOnClick;') {
