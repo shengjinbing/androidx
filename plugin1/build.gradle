@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.medi.hook"
+        applicationId "com.medi.plugin1"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -25,6 +25,22 @@ android {
 
 }
 
+android.applicationVariants.all { variant ->
+    // Copy Release artifact to HostApp's assets and rename
+    println("variant.name=="+variant.name)
+    if (variant.name == "debug") {
+        variant.outputs.each { output ->
+            File originFile = output.outputFile
+            println originFile.absolutePath
+            copy {
+                from originFile
+                into "$rootDir/hostapp/src/main/assets"
+                rename(originFile.name, "plugin1.apk")
+            }
+        }
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -34,5 +50,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //插件瘦身的时候可以把mypluginlibrary打成jar使用provided打包的时候不打进apk中；
+    //因为provided不支持module
     implementation project(path: ':mypluginlibrary')
 }

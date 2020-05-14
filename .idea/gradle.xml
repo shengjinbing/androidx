@@ -14,6 +14,9 @@
             <option value="$PROJECT_DIR$/asmplugin" />
             <option value="$PROJECT_DIR$/asmsdk" />
             <option value="$PROJECT_DIR$/hook" />
+            <option value="$PROJECT_DIR$/hostapp" />
+            <option value="$PROJECT_DIR$/mypluginlibrary" />
+            <option value="$PROJECT_DIR$/plugin1" />
             <option value="$PROJECT_DIR$/track" />
           </set>
         </option>
