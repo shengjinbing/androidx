@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">plugin1</string>
+
+    <string name="plugin_text">我是插件1的内容</string>
 </resources>
