@@ -5,6 +5,9 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'com.sensorsdata.android'
 
+//多渠道打包
+apply plugin: 'walle'
+
 
 android {
     compileSdkVersion 29
@@ -20,13 +23,47 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            storeFile file('keystore.jks')
+            storePassword '123456'
+            keyAlias = 'ext'
+            keyPassword '123456'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        debug {
+            storeFile file('keystore.jks')
+            storePassword '123456'
+            keyAlias = 'ext'
+            keyPassword '123456'
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
     }
 
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    walle {
+        // 指定渠道包的输出路径
+        apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+        // 定制渠道包的APK的文件名称
+        apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
+        // 渠道配置文件
+        channelFile = new File("${project.getProjectDir()}/channel")
+    }
 }
 
 dependencies {
@@ -61,5 +98,8 @@ dependencies {
     implementation project(path: ':track')
     implementation project(':asmsdk')
 
+
+    //多渠道打包
+    implementation 'com.meituan.android.walle:library:1.1.6'
 
 }

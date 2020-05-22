@@ -1,7 +1,9 @@
 package com.medi.androidxdevelop.base
 
 import android.app.Application
-import com.medi.track.TrackApplication
+import android.util.Log
+import android.widget.Toast
+import com.meituan.android.walle.WalleChannelReader
 import com.sensorsdata.analytics.android.sdk.SensorsDataAPI
 
 /**
@@ -14,6 +16,9 @@ class BaseApplication: Application(){
         ApplicationContext.application = this
         ApplicationContext.context = this
 
+        val channel = WalleChannelReader.getChannel(this.applicationContext)
+        Toast.makeText(this,"channel==${channel}",Toast.LENGTH_SHORT).show()
+        Log.d("BaseApplication","channel==${channel}")
         //ASM
         initASMSensorsDataAPI(this)
     }

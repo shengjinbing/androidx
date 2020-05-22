@@ -19,12 +19,14 @@ public class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
+        initHookDexClassLoader(newBase);
 
+    }
+
+    private void initHookDexClassLoader(Context newBase) {
         Utils.extractAssets(newBase, apkName);
-
         File dexFile = getFileStreamPath(apkName);
         File optDexFile = getFileStreamPath(dexName);
-
         try {
             BaseDexClassLoaderHookHelper.patchClassLoader(getClassLoader(), dexFile, optDexFile);
         } catch (Exception e) {
