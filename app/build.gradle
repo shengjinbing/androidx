@@ -64,6 +64,14 @@ android {
         // 渠道配置文件
         channelFile = new File("${project.getProjectDir()}/channel")
     }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+
+
 }
 
 dependencies {
