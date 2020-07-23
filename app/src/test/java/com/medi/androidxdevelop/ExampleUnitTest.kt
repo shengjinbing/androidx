@@ -10,6 +10,9 @@ import okhttp3.internal.wait
 import org.junit.Test
 
 import org.junit.Assert.*
+import kotlin.properties.Delegates
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 import kotlin.system.measureTimeMillis
 
 /**
@@ -482,6 +485,43 @@ class ExampleUnitTest {
             println("$name $ball")
             delay(300) // 等待一段时间
             table.send(ball) // 将球发送回去
+        }
+    }
+
+
+    //属性委托
+    //默认情况下，对于 lazy 属性的求值是同步锁的（synchronized）：该值只在一个线程中计算，并且所有线程会看到相同的值。
+    // 如果初始化委托的同步锁不是必需的，这样多个线程可以同时执行，那么将 LazyThreadSafetyMode.PUBLICATION
+    // 作为参数传递给 lazy() 函数。 而如果你确定初始化将总是发生在与属性使用位于相同的线程， 那么可以使用
+    // LazyThreadSafetyMode.NONE 模式：它不会有任何线程安全的保证以及相关的开销。
+    @Test
+    fun mainTest17(){
+        val p: String by Delegate()
+        println("${p}")
+
+        val lazyValue: String by lazy {
+            println("computed!")
+            "Hello"
+        }
+        println(lazyValue)
+        println(lazyValue)
+
+        var name: String by Delegates.observable("<no name>") {
+                prop, old, new ->
+            println("$old -> $new")
+        }
+        name = "first"
+        name = "second"
+
+    }
+
+    class Delegate{
+        operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+            return "$thisRef, thank you for delegating '${property.name}' to me!"
+        }
+
+        operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+            println("$value has been assigned to '${property.name}' in $thisRef.")
         }
     }
 }
