@@ -1,5 +1,6 @@
 package com.medi.androidxdevelop
 
+import androidx.arch.core.internal.SafeIterableMap
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
@@ -496,6 +497,11 @@ class ExampleUnitTest {
     // LazyThreadSafetyMode.NONE 模式：它不会有任何线程安全的保证以及相关的开销。
     @Test
     fun mainTest17(){
+      /*  val hashMapOf = SafeIterableMap<String,String>()
+        hashMapOf.putIfAbsent("1","2")
+        hashMapOf.forEach{
+            hashMapOf.remove(it.key)
+        }*/
         val p: String by Delegate()
         println("${p}")
 
@@ -524,4 +530,5 @@ class ExampleUnitTest {
             println("$value has been assigned to '${property.name}' in $thisRef.")
         }
     }
+
 }
