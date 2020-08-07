@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.medi.androidxdevelop.activitys.AppViewScreenActivity
+import com.medi.androidxdevelop.activitys.AsyncTaskActivity
 import com.medi.androidxdevelop.mvvm.MvvmActivity
 import com.sensorsdata.analytics.android.sdk.SensorsDataTrackViewOnClick
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,6 +28,11 @@ class MainActivity : AppCompatActivity(),CoroutineScope {
         }
         btn_screen.setOnClickListener {
             startActivity(Intent(this,AppViewScreenActivity::class.java))
+        }
+
+        btn_asynctask.setOnClickListener {
+            startActivity(Intent(this,AsyncTaskActivity::class.java))
+
         }
 
     }

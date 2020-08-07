@@ -27,7 +27,8 @@ class MvvmActivity : AppCompatActivity(), CoroutineScope {
     private fun initData() {
         launchUI{
             try {
-                val (data, netExecption) = ApiService.apiService.getfee().awaitOrError()
+                val (data, netExecption) =
+                    ApiService.apiService.getfee().awaitOrError()
                 netExecption?.composeException { code, message ->
                     Log.d("BBBBB","code==${code}  message==${message}")
                 } ?: kotlin.run{

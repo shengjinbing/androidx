@@ -32,7 +32,7 @@ android {
             v1SigningEnabled true
             v2SigningEnabled true
         }
-        debug {
+        rdebug {
             storeFile file('keystore.jks')
             storePassword '123456'
             keyAlias = 'ext'
@@ -43,10 +43,10 @@ android {
     }
 
     buildTypes {
-        debug {
+        rdebug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.rdebug
         }
 
         release {

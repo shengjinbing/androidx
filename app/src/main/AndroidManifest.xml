@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".activitys.AsyncTaskActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".activitys.AppViewScreenActivity"
             android:label="屏幕采集" />
