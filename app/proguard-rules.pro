@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#keep  保留类和类中的成员，防止它们被混淆或移除。
+#keepnames 保留类和类中的成员，防止它们被混淆，但当成员没有被引用时会被移除。
+#keepclassmembers  只保留类中的成员，防止它们被混淆或移除。
+#keepclassmembernames  只保留类中的成员，防止它们被混淆，但当成员没有被引用时会被移除。
+#keepclasseswithmembers  保留类和类中的成员，防止它们被混淆或移除，前提是指名的类中的成员必须存在，如果不存在则还是会混淆。
+#keepclasseswithmembernames  保留类和类中的成员，防止它们被混淆，但当成员没有被引用时会被移除，前提是指名的类中的成员必须存在，如果不存在则还是会混淆。

@@ -116,6 +116,13 @@ dependencies {
     implementation project(path: ':track')
     implementation project(':asmsdk')
 
+    //检测内存泄露
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+
+    //卡顿监听
+    debugCompile 'com.github.markzhai:blockcanary-android:1.5.0'
+    releaseCompile 'com.github.markzhai:blockcanary-no-op:1.5.0'
+
 
     //多渠道打包
     implementation 'com.meituan.android.walle:library:1.1.6'
