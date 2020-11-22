@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.medi.androidxdevelop.R
+import com.medi.androidxdevelop.network.ApiService
 import com.medi.comm.network.result.awaitOrError
 import kotlinx.android.synthetic.main.activity_mvvm.*
 import kotlinx.coroutines.*

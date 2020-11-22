@@ -28,8 +28,8 @@ import dalvik.system.DexFile;
 public class BaseDexClassLoaderHookHelper {
 
     /**
-     * hook宿主的classLoader可以将插件的dex和宿主的合并，省去一个插件需要创建一个classLoader
-     * @param cl
+     * hook宿主的classLoader可以将插件的dex和宿主的合并，省去一个插件需要创建一个classLoader(可以自己创建一个DexclassLoader实现)
+     * @param cl 这里是PathClassLoader
      * @param apkFile
      * @param optDexFile
      * @throws IllegalAccessException

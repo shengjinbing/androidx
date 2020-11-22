@@ -2,6 +2,7 @@ package com.medi.hostapp.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.medi.hostapp.Utils;
 import com.medi.hostapp.hookhelper.BaseDexClassLoaderHookHelper;
@@ -26,7 +27,12 @@ public class BaseApplication extends Application {
     private void initHookDexClassLoader(Context newBase) {
         Utils.extractAssets(newBase, apkName);
         File dexFile = getFileStreamPath(apkName);
+        Log.d("BBBBB","dexFile==="+dexFile.getAbsolutePath());
         File optDexFile = getFileStreamPath(dexName);
+        Log.d("BBBBB","optDexFile==="+optDexFile.getAbsolutePath());
+        Log.d("BBBBB","getCacheDir==="+getCacheDir().getAbsolutePath());
+        Log.d("BBBBB","getFilesDir==="+getFilesDir().getAbsolutePath());
+        Log.d("BBBBB","getClassLoader==="+getClassLoader().getClass().getSimpleName());
         try {
             BaseDexClassLoaderHookHelper.patchClassLoader(getClassLoader(), dexFile, optDexFile);
         } catch (Exception e) {

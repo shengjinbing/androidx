@@ -1,4 +1,4 @@
-package com.medi.androidxdevelop.mvvm
+package com.medi.androidxdevelop.network
 
 import com.medi.androidxdevelop.mvvm.Entity.BaseResponse
 import com.medi.androidxdevelop.mvvm.Entity.FeeEntity
@@ -15,6 +15,7 @@ interface ApiService {
     @POST("/mgrdoctor/doctor/getConsultPrices")
     fun getfee(): Deferred<BaseResponse<MutableList<FeeEntity>>>
 
-    object apiService : ApiService by baseRetrofit.create(ApiService::class.java)
+    object apiService : ApiService by baseRetrofit.create(
+        ApiService::class.java)
 }
 

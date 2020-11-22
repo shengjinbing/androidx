@@ -107,16 +107,19 @@
    
 19.为什么TCP要三次握手，两次不行吗？
   https://blog.csdn.net/lengxiao1993/article/details/82771768
+  1.什么叫连接？
+  2.TCP连接的建立和关闭
+  3.长连接，什么叫长连接？长连接的实现方式：心跳（推送）
 
 20.TCP与UDP的区别，OSI五层结构
 https://www.cnblogs.com/wxd0108/p/7597216.html
 一、OSI七层模型
-  OSI七层协议模型主要是：应用层（Application）、表示层（Presentation）、会话层（Session）、传输层（Transport）、网络层（Network）、
-数据链路层（Data Link）、物理层（Physical）。
+  OSI七层协议模型主要是：应用层（Application）、表示层（Presentation）、会话层（Session）、传输层（Transport）、
+  网络层（Network）、数据链路层（Data Link）、物理层（Physical）。
 二、TCP/IP四层模型
-  TCP/IP是一个四层的体系结构，主要包括：应用层、运输层、网际层和网络接口层。从实质上讲，只有上边三层，网络接口层没有什么具体的内容。
+  TCP/IP是一个四层的体系结构，主要包括：应用层、传输层、网络层和数据链路层。（因为网络不稳定，所以要分层传输）
 三、五层体系结构
-  五层体系结构包括：应用层、运输层、网络层、数据链路层和物理层。
+  五层体系结构包括：应用层、传输层、网络层、数据链路层和物理层。
 
 23.线程的所有状态
 

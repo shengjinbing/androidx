@@ -15,14 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitys.LeakCanaryActivity"></activity>
+        <activity android:name=".activitys.BlockCanaryActivity"></activity>
+        <activity android:name=".activitys.LeakCanaryActivity" />
         <activity android:name=".activitys.AsyncTaskActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".activitys.AppViewScreenActivity"
             android:label="屏幕采集" />
         <activity android:name=".mvvm.MvvmActivity" />
-        <activity android:name=".WelcomeActivity"
+        <activity
+            android:name=".WelcomeActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.medi.plugin1.TestService"/>
     </application>
 
 </manifest>

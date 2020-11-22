@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.medi.androidxdevelop.mvvm.Entity.FeeEntity
+import com.medi.androidxdevelop.network.ApiService
 import com.medi.comm.network.result.awaitOrError
 import kotlinx.coroutines.launch
 

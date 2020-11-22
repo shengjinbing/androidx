@@ -12,6 +12,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.medi.androidxdevelop.activitys.AppViewScreenActivity
 import com.medi.androidxdevelop.activitys.AsyncTaskActivity
+import com.medi.androidxdevelop.activitys.BlockCanaryActivity
 import com.medi.androidxdevelop.activitys.LeakCanaryActivity
 import com.medi.androidxdevelop.mvvm.MvvmActivity
 import com.sensorsdata.analytics.android.sdk.SensorsDataTrackViewOnClick
@@ -45,7 +46,9 @@ class MainActivity : AppCompatActivity(),CoroutineScope {
         btn_leakCannary.setOnClickListener {
             startActivity(Intent(this,LeakCanaryActivity::class.java))
         }
-
+        btn_blockCannary.setOnClickListener {
+            startActivity(Intent(this, BlockCanaryActivity::class.java))
+        }
     }
 
     @SensorsDataTrackViewOnClick

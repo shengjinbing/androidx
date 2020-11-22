@@ -3,6 +3,8 @@ package com.medi.androidxdevelop.base
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
+import com.github.moduth.blockcanary.BlockCanary
+import com.github.moduth.blockcanary.BlockCanaryContext
 import com.meituan.android.walle.WalleChannelReader
 import com.sensorsdata.analytics.android.sdk.SensorsDataAPI
 
@@ -21,6 +23,8 @@ class BaseApplication: Application(){
         Log.d("BaseApplication","channel==${channel}")
         //ASM
         initASMSensorsDataAPI(this)
+        //BlockCanary
+        BlockCanary.install(this, BlockCanaryContext()).start()
     }
 
     /**
