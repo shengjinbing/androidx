@@ -21,7 +21,7 @@ ext {
 
     version = [
             glideSdkVersion : "4.11.0",
-            canarySdkVersion: "1.5.4",
+            canarySdkVersion: "2.5",
             lifecycleVersion: '2.1.0',
             retrofitVersion : '2.6.3',
             okhttpVersion   : '4.2.2',
@@ -188,8 +188,6 @@ ext {
 
             //test
             "canary-debug"                 : "com.squareup.leakcanary:leakcanary-android:${version["canarySdkVersion"]}",
-            "canary-release"               : "com.squareup.leakcanary:leakcanary-android-no-op:${version["canarySdkVersion"]}",
-
     ]
 
 
