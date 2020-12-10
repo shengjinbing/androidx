@@ -13,8 +13,27 @@ import leakcanary.LeakCanary
 import okhttp3.internal.wait
 
 /**
- * Created by lixiang on 2020/4/1
- * Describe:
+ *
+ * https://www.jianshu.com/p/94e0f9ab3f1d
+ * 1.一个应用程序有几个Context:
+ * 其实这个问题本身并没有什么意义，关键还是在于对Context的理解，从上面的关系图我们已经可以得出答案了，
+ * 在应用程序中Context的具体实现子类就是：Activity，Service，Application。那么Context
+ * 数量=Activity数量+Service数量+应用进程数量。当然如果你足够细心，可能会有疑问：我们常说四大组件，
+ * 这里怎么只有Activity，Service持有Context，那Broadcast Receiver，Content Provider呢？
+ * Broadcast Receiver，Content Provider并不是Context的子类，他们所持有的Context都是其他地方传
+ * 过去的，所以并不计入Context总数。上面的关系图也从另外一个侧面告诉我们Context类在整个Android系统中
+ * 的地位是多么的崇高，因为很显然Activity，Service，Application都是其子类，其地位和作用不言而喻。
+ * 2.这里我说一下上图中Application和Service所不推荐的两种使用情况。
+ *   1：如果我们用ApplicationContext去启动一个LaunchMode为standard的Activity的时候会报错
+ *   android.util.AndroidRuntimeException: Calling startActivity from outside of an
+ *   Activity context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you
+ *   want?这是因为非Activity类型的Context并没有所谓的任务栈，所以待启动的Activity就找不到栈了。解决这
+ *   个问题的方法就是为待启动的Activity指定FLAG_ACTIVITY_NEW_TASK标记位，这样启动的时候就为它创建一个
+ *   新的任务栈，而此时Activity是以singleTask模式启动的。所有这种用Application启动Activity的方式不推
+ *   荐使用，Service同Application。
+ *   2：在Application和Service中去layout inflate也是合法的，但是会使用系统默认的主题样式，
+ *   如果你自定义了某些样式可能不会被使用。所以这种方式也不推荐使用。
+一句话总结：凡是跟UI相关的，都应该使用Activity做为Context来处理；其他的一些操作，Service,Activity,Application等实例都可以，当然了，注意Context引用的持有，防止内存泄漏。
  */
 class BaseApplication : Application() {
     override fun onCreate() {

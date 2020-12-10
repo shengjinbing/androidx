@@ -56,6 +56,15 @@ android {
         }
     }
 
+    splits {
+        density{
+            enable true
+            exclude "ldpi","xxhdpi"
+            // Specifies a list of compatible screen size settings for the manifest.
+            compatibleScreens 'small', 'normal', 'large', 'xlarge'
+        }
+    }
+
     walle {
         // 指定渠道包的输出路径
         apkOutputFolder = new File("${project.buildDir}/outputs/channels");
