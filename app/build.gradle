@@ -56,6 +56,15 @@ android {
         }
     }
 
+    splits {
+        density{
+            enable true
+            exclude "ldpi","xxhdpi"
+            // Specifies a list of compatible screen size settings for the manifest.
+            compatibleScreens 'small', 'normal', 'large', 'xlarge'
+        }
+    }
+
     walle {
         // 指定渠道包的输出路径
         apkOutputFolder = new File("${project.buildDir}/outputs/channels")
@@ -114,7 +123,8 @@ dependencies {
     implementation project(':asmsdk')
 
     //检测内存泄露
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+    debugImplementation rootProject.ext.deps["canary-debug"]
+    //implementation 'com.squareup.leakcanary:leakcanary-object-watcher-android:2.5'
 
     //卡顿监听
     debugCompile 'com.github.markzhai:blockcanary-android:1.5.0'
