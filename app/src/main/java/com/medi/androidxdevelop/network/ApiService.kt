@@ -13,7 +13,7 @@ import retrofit2.http.POST
 interface ApiService {
 
     @POST("/mgrdoctor/doctor/getConsultPrices")
-    fun getfee(): Deferred<BaseResponse<MutableList<FeeEntity>>>
+    suspend fun getfee(): BaseResponse<MutableList<FeeEntity>>
 
     object apiService : ApiService by baseRetrofit.create(
         ApiService::class.java)

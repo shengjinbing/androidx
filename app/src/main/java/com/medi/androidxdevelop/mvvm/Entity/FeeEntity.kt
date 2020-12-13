@@ -5,5 +5,5 @@ package com.medi.androidxdevelop.mvvm.Entity
  * Describe:
  */
 data class FeeEntity(val id: String,
-                     val dictName: String,
-                     val dictValue: String)
+                     var dictName: String,
+                     var dictValue: String)

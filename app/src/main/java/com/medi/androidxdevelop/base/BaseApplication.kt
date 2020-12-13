@@ -18,13 +18,17 @@ class BaseApplication: Application(){
         ApplicationContext.application = this
         ApplicationContext.context = this
 
-        val channel = WalleChannelReader.getChannel(this.applicationContext)
-        Toast.makeText(this,"channel==${channel}",Toast.LENGTH_SHORT).show()
-        Log.d("BaseApplication","channel==${channel}")
+        initChannel()
         //ASM
         initASMSensorsDataAPI(this)
         //BlockCanary
         BlockCanary.install(this, BlockCanaryContext()).start()
+    }
+
+    fun initChannel(){
+        val channel = WalleChannelReader.getChannel(this.applicationContext)
+        Toast.makeText(this,"channel==${channel}",Toast.LENGTH_SHORT).show()
+        Log.d("BaseApplication","channel==${channel}")
     }
 
     /**

@@ -20,17 +20,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class MainActivity : AppCompatActivity(),CoroutineScope {
-    private val job = Job()
-    private var isUI = true
-    override val coroutineContext: CoroutineContext
-        get() = if (isUI) Dispatchers.Main + job else Dispatchers.IO + job
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        lifecycle.addObserver(MyObserver())
-        Looper.getMainLooper()
 
         btn_mvvm.setOnClickListener {
             startActivity(Intent(this,MvvmActivity::class.java))
@@ -54,24 +48,6 @@ class MainActivity : AppCompatActivity(),CoroutineScope {
     @SensorsDataTrackViewOnClick
     fun testAnnotation(view: View) {
         Toast.makeText(applicationContext,"测试asm",Toast.LENGTH_LONG).show()
-    }
-
-
-    /**
-     * 监听生命周期
-     */
-    class MyObserver : LifecycleObserver {
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-        fun connectListener() {
-            Log.d("BBBBB","ON_RESUME")
-        }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-        fun disconnectListener() {
-            Log.d("BBBBB","ON_PAUSE")
-
-        }
     }
 }
 

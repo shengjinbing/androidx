@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitys.BlockCanaryActivity"></activity>
+        <activity android:name=".mvvm.LifecycleActivity"></activity>
+        <activity android:name=".activitys.BlockCanaryActivity" />
         <activity android:name=".activitys.LeakCanaryActivity" />
         <activity android:name=".activitys.AsyncTaskActivity" />
         <activity android:name=".MainActivity" />
