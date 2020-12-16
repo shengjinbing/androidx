@@ -4,7 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.medi.hostapp.Utils;
+import com.medi.hostapp.hookhelper.HookHelper;
+import com.medi.hostapp.utils.Utils;
 import com.medi.hostapp.hookhelper.BaseDexClassLoaderHookHelper;
 
 import java.io.File;
@@ -21,7 +22,8 @@ public class BaseApplication extends Application {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
         initHookDexClassLoader(newBase);
-
+        //HookHelper.hookPackageManager(this);
+        HookHelper.hookActivityManager();
     }
 
     private void initHookDexClassLoader(Context newBase) {

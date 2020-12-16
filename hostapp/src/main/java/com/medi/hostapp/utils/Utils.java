@@ -1,4 +1,4 @@
-package com.medi.hostapp;
+package com.medi.hostapp.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;

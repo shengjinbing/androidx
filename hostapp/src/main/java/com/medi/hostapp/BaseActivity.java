@@ -8,6 +8,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.medi.hostapp.utils.Utils;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.HashMap;

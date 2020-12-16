@@ -1,9 +1,9 @@
 package com.medi.hostapp
 
-import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import com.medi.hostapp.utils.RefInvoke
 import kotlinx.android.synthetic.main.activity_resource.*
 
 class ResourceActivity : BaseActivity() {

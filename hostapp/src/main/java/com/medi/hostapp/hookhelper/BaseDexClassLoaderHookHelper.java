@@ -1,6 +1,6 @@
 package com.medi.hostapp.hookhelper;
 
-import com.medi.hostapp.RefInvoke;
+import com.medi.hostapp.utils.RefInvoke;
 
 import java.io.File;
 import java.io.IOException;
