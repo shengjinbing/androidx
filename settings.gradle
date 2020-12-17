@@ -1,3 +1,4 @@
+include ':myplugin'
 include ':daggerdemo'
 include ':baselibrary'
 rootProject.name='androidxDevelop'

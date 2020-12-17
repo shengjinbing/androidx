@@ -1,5 +1,14 @@
 1.MVC、MVP、MVVM
   MVC：标准已经多样化，无需纠结
+面试题：
+1.RN和flutter的绘制原理
+2.android冷启动
+3.binder机制原理
+4.art和darvlik区别
+5.multidex下如何保证打包到主dex  
+  
+  
+  
 专业技能：
 熟悉TCP/IP、HTTP、HTTPS网络通讯协议，对一些常用header以及状态码有过了解。
 熟悉Android的消息机制,明白同步屏障的实现原理和使用场景,了解IdleHandler的处理流程

@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: 'com.sensorsdata.android'
+//apply plugin: 'myplugin'
 
 //多渠道打包
 apply plugin: 'walle'
