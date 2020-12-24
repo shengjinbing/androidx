@@ -3,6 +3,7 @@ package com.medi.androidxdevelop.base
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
+import androidx.multidex.MultiDex
 import com.github.moduth.blockcanary.BlockCanary
 import com.github.moduth.blockcanary.BlockCanaryContext
 import com.medi.androidxdevelop.leakcanary.LeakUploader
@@ -38,6 +39,7 @@ import okhttp3.internal.wait
 class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        MultiDex.install(this);
         ApplicationContext.application = this
         ApplicationContext.context = this
 

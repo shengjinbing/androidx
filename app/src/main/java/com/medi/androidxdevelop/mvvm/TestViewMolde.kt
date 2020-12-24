@@ -1,20 +1,23 @@
 package com.medi.androidxdevelop.mvvm
 
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.medi.androidxdevelop.mvvm.Entity.FeeEntity
+import com.medi.androidxdevelop.mvvm.entity.FeeEntity
 import com.medi.androidxdevelop.network.ApiService
 import com.medi.comm.network.result.awaitOrError
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 /**
- * Created by lixiang on 2020/4/1
- * Describe:
+ * 1.为应用中的每个 ViewModel 定义了 ViewModelScope。如果 ViewModel 已清除，则在此范围内启动的协
+ * 程都会自动取消。如果您具有仅在 ViewModel 处于活动状态时才需要完成的工作，此时协程非常有用。
  */
-class TestViewMolde : ViewModel() {
+class TestViewModel : ViewModel() {
     var fee = MutableLiveData<MutableList<FeeEntity>>()
     fun getFee(){
         viewModelScope.launch{
@@ -24,6 +27,25 @@ class TestViewMolde : ViewModel() {
             } ?: kotlin.run{
                 fee.value = data?.data
             }
+        }
+    }
+
+
+    //初始化ViewModel
+    companion object {
+        fun instanceOf(activity: AppCompatActivity): TestViewModel =
+            ViewModelProvider(activity, ViewModelFactory).get(TestViewModel::class.java)
+
+        fun instanceOf(fragment: Fragment): TestViewModel =
+            ViewModelProvider(fragment, ViewModelFactory)[TestViewModel::class.java]
+    }
+
+    private object ViewModelFactory : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (TestViewModel::class.java.isAssignableFrom(modelClass)) {
+                return modelClass.newInstance()
+            }
+            throw IllegalArgumentException("FollowViewModel is not assignable from $modelClass")
         }
     }
 }

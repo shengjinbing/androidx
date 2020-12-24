@@ -1,9 +1,8 @@
 package com.medi.androidxdevelop.network
 
-import com.medi.androidxdevelop.mvvm.Entity.BaseResponse
-import com.medi.androidxdevelop.mvvm.Entity.FeeEntity
+import com.medi.androidxdevelop.mvvm.entity.BaseResponse
+import com.medi.androidxdevelop.mvvm.entity.FeeEntity
 import com.medi.comm.network.baseRetrofit
-import kotlinx.coroutines.Deferred
 import retrofit2.http.POST
 
 /**

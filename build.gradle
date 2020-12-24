@@ -17,7 +17,7 @@ buildscript {
 
         //自定义插件
         classpath 'com.sensorsdata:autotrack.android:1.0.1'
-        classpath 'com.medi.myplugin:myplugin:1.0.0'
+        classpath 'com.medi.plugin:myplugin:1.0.1'
         //多渠道打包
         classpath 'com.meituan.android.walle:plugin:1.1.6'
     }

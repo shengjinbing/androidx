@@ -7,7 +7,7 @@ import org.gradle.api.tasks.TaskAction
  * Created by lixiang on 2020/12/17
  * Describe:
  */
-class MyTast : DefaultTask() {
+open class MyTast : DefaultTask() {
 
     @TaskAction
     fun action(){

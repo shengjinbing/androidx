@@ -33,6 +33,22 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_content"
         />
 
-
-
+    <Button
+        android:id="@+id/tv_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="workmanager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_LifecycleOwner"
+        />
+    <Button
+        android:id="@+id/tv_databinding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="databinding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_work"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.medi.androidxdevelop.mvvm.Entity
+package com.medi.androidxdevelop.mvvm.entity
 
 /**
  * Created by lixiang on 2020/4/1
