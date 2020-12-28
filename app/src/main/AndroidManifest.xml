@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitys.DataBindingActivity"></activity>
+        <activity android:name=".activitys.CoroutinesActivity"></activity>
+        <activity android:name=".activitys.DataBindingActivity" />
         <activity android:name=".mvvm.WorkActivity" />
         <activity android:name=".mvvm.LifecycleActivity" />
         <activity android:name=".activitys.BlockCanaryActivity" />
