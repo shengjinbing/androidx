@@ -10,8 +10,10 @@ import com.medi.androidxdevelop.leakcanary.LeakUploader
 import com.meituan.android.walle.WalleChannelReader
 import com.sensorsdata.analytics.android.sdk.SensorsDataAPI
 import leakcanary.AppWatcher
+import leakcanary.AppWatcher.config
 import leakcanary.LeakCanary
-import okhttp3.internal.wait
+import leakcanary.LeakCanary.config
+
 
 /**
  *
@@ -53,30 +55,33 @@ class BaseApplication : Application() {
 
     /**
      * 2.0版本之后不需要再进行配置
+     * https://square.github.io/leakcanary/upgrading-to-leakcanary-2.0/
      */
     private fun initLeakCanary() {
-        //配置LeakCanary
-       /* if (LeakCanary.isInAnalyzerProcess(this)) {
-            return
-        }
-        LeakCanary.install(this)*/
+        //配置LeakCanary，版本为1需要这样配置，2版本无需配置
+        /* if (LeakCanary.isInAnalyzerProcess(this)) {
+             return
+         }
+         LeakCanary.install(this)*/
 
 
         //您可以观看不再需要的任何对象，例如分离视图或损坏的演示者：
         //AppWatcher.objectWatcher.watch()
+        //AppWatcher.config = AppWatcher.config.copy(watchFragmentViews = false)
+
 
         //禁用LeakCanary
         //LeakCanary.config.copy(dumpHeap = false)//禁用堆转储和分析
+        //LeakCanary.config.copy(retainedVisibleThreshold = 1)
         //LeakCanary.showLeakDisplayActivityLauncherIcon(false)//隐藏泄漏显示活动启动器图标
-
         //配置上传到服务器的堆转储
-        //LeakCanary.config = LeakCanary.config.copy(onHeapAnalyzedListener = LeakUploader())
+        LeakCanary.config = LeakCanary.config.copy(onHeapAnalyzedListener = LeakUploader())
     }
 
-    fun initChannel(){
+    fun initChannel() {
         val channel = WalleChannelReader.getChannel(this.applicationContext)
-        Toast.makeText(this,"channel==${channel}",Toast.LENGTH_SHORT).show()
-        Log.d("BaseApplication","channel==${channel}")
+        Toast.makeText(this, "channel==${channel}", Toast.LENGTH_SHORT).show()
+        Log.d("BaseApplication", "channel==${channel}")
     }
 
     /**

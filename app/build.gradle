@@ -22,6 +22,8 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument "listener", "leakcanary.FailTestOnLeakRunListener"
     }
 
     signingConfigs {
@@ -128,6 +130,7 @@ dependencies {
 
     //检测内存泄露
     debugImplementation rootProject.ext.deps["canary-debug"]
+    androidTestImplementation rootProject.ext.deps["canary-test"]
     //implementation 'com.squareup.leakcanary:leakcanary-object-watcher-android:2.5'
 
     //卡顿监听

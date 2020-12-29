@@ -2,6 +2,7 @@ package com.medi.hostapp.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import com.medi.hostapp.hookhelper.HookHelper;
@@ -32,6 +33,11 @@ public class BaseApplication extends Application {
         Log.d("BBBBB","optDexFile==="+optDexFile.getAbsolutePath());
         Log.d("BBBBB","getCacheDir==="+getCacheDir().getAbsolutePath());
         Log.d("BBBBB","getFilesDir==="+getFilesDir().getAbsolutePath());
+        Log.d("BBBBB","getExternalCacheDir==="+getExternalCacheDir().getAbsolutePath());
+        Log.d("BBBBB","getExternalFilesDir==="+getExternalFilesDir(null).getAbsolutePath());
+        Log.d("BBBBB","getExternalStorageDirectory==="+ Environment.getExternalStorageDirectory().getAbsolutePath());
+
+
         Log.d("BBBBB","getClassLoader==="+getClassLoader().getClass().getSimpleName());
         try {
             BaseDexClassLoaderHookHelper.patchClassLoader(getClassLoader(), dexFile, optDexFile);

@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.medi.androidxdevelop.activitys.*
+import com.medi.androidxdevelop.leakcanary.HeapDump
 import com.medi.androidxdevelop.mvvm.MvvmActivity
 import com.sensorsdata.analytics.android.sdk.SensorsDataTrackViewOnClick
 import kotlinx.android.synthetic.main.activity_main.*
