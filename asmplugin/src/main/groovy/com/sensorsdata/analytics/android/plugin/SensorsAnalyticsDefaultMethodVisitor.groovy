@@ -5,6 +5,12 @@ import org.objectweb.asm.commons.AdviceAdapter
 
 /**
  * 父类实现MethodVisitor接口，主要负责"拜访"方法的信息，用来进行具体的方法字节码操作。
+ *
+ * JVM指令:
+ * load 命令：用于将局部变量表的指定位置的相应类型变量加载到操作数栈顶；
+ * store命令：用于将操作数栈顶的相应类型数据保入局部变量表的指定位置；
+ * invokevirtual:调用实例方法
+ * ireturn: 当前方法返回int
  */
 class SensorsAnalyticsDefaultMethodVisitor extends AdviceAdapter {
 
@@ -20,6 +26,14 @@ class SensorsAnalyticsDefaultMethodVisitor extends AdviceAdapter {
         super.visitCode()
     }
 
+
+    /**
+     * 访问方法操作指令
+     * @param opcode
+     * @param owner
+     * @param name
+     * @param desc
+     */
     @Override
     void visitMethodInsn(int opcode, String owner, String name, String desc) {
         super.visitMethodInsn(opcode, owner, name, desc)
@@ -38,6 +52,13 @@ class SensorsAnalyticsDefaultMethodVisitor extends AdviceAdapter {
         super.visitEnd()
     }
 
+    /**
+     * 域操作指令，用来加载或者存储对象的Field
+     * @param opcode
+     * @param owner
+     * @param name
+     * @param desc
+     */
     @Override
     void visitFieldInsn(int opcode, String owner, String name, String desc) {
         super.visitFieldInsn(opcode, owner, name, desc)
@@ -48,6 +69,11 @@ class SensorsAnalyticsDefaultMethodVisitor extends AdviceAdapter {
         super.visitIincInsn(var, increment)
     }
 
+    /**
+     * 访问本地变量类型指令 操作码可以是LOAD,STORE，RET中一种；
+     * @param i
+     * @param i1
+     */
     @Override
     void visitIntInsn(int i, int i1) {
         super.visitIntInsn(i, i1)

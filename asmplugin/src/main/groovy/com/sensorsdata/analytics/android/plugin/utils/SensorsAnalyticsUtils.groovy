@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.sensorsdata.analytics.android.plugin
+package com.sensorsdata.analytics.android.plugin.utils
 
 import org.objectweb.asm.Opcodes
 

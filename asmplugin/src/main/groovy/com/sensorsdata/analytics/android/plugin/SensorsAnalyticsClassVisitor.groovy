@@ -1,5 +1,6 @@
 package com.sensorsdata.analytics.android.plugin
 
+import com.sensorsdata.analytics.android.plugin.utils.SensorsAnalyticsUtils
 import org.objectweb.asm.AnnotationVisitor
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.Handle
@@ -32,6 +33,7 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
     }
 
     /**
+     * 扫描类的时候第一个调用的方法
      * 可以拿到类的详细信息，然后对满足条件的类进行行过滤
      * @param version JDK的版本
      * @param access 类的修饰符，修饰符中以"ACC_"开头的常量，ACC_PUBLIC、ACC_ENUM
@@ -111,6 +113,15 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
             }
 
             /**
+             * 在方法结束的时候处理这样不会影响到原有点击事件的响应速度
+             * @param opcode
+             */
+            @Override
+            protected void onMethodExit(int opcode) {
+                super.onMethodExit(opcode)
+            }
+
+             /**
              * 进入方法插入字节码
              */
             @Override
@@ -170,46 +181,57 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
 
                 if ((mInterfaces != null && mInterfaces.length > 0)) {
                     if ((mInterfaces.contains('android/view/View$OnClickListener') && nameDesc == 'onClick(Landroid/view/View;)V')) {
+                        //实现OnClickListener接口的点击事件
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Landroid/view/View;)V", false)
                     } else if (mInterfaces.contains('android/content/DialogInterface$OnClickListener') && nameDesc == 'onClick(Landroid/content/DialogInterface;I)V') {
+                        //AlertDialog的点击事件，onClick方法有两个参数一个是DialogInterface另一个是Int
+                        //ALOAD是指加载对象类型的参数，ILOAD是指加载基础类型的参数，如int、long、boolean等
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitVarInsn(ILOAD, 2)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Landroid/content/DialogInterface;I)V", false)
                     } else if (mInterfaces.contains('android/content/DialogInterface$OnMultiChoiceClickListener') && nameDesc == 'onClick(Landroid/content/DialogInterface;IZ)V') {
+                        //支持MenuItem的点击事件
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitVarInsn(ILOAD, 2)
                         methodVisitor.visitVarInsn(ILOAD, 3)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Landroid/content/DialogInterface;IZ)V", false)
                     } else if (mInterfaces.contains('android/widget/CompoundButton$OnCheckedChangeListener') && nameDesc == 'onCheckedChanged(Landroid/widget/CompoundButton;Z)V') {
+                        //支持CheckBox、SwitchCompat、RadioButton、ToggleButton、RadioGroup的点击事件,他们点击事件设置的listener一样
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitVarInsn(ILOAD, 2)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Landroid/widget/CompoundButton;Z)V", false)
                     } else if (mInterfaces.contains('android/widget/RatingBar$OnRatingBarChangeListener') && nameDesc == 'onRatingChanged(Landroid/widget/RatingBar;FZ)V') {
+                        //支持RatingBar的点击事件
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Landroid/view/View;)V", false)
                     } else if (mInterfaces.contains('android/widget/SeekBar$OnSeekBarChangeListener') && nameDesc == 'onStopTrackingTouch(Landroid/widget/SeekBar;)V') {
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Landroid/view/View;)V", false)
                     } else if (mInterfaces.contains('android/widget/AdapterView$OnItemSelectedListener') && nameDesc == 'onItemSelected(Landroid/widget/AdapterView;Landroid/view/View;IJ)V') {
+                        //支持Spinner的点击事件
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitVarInsn(ALOAD, 2)
                         methodVisitor.visitVarInsn(ILOAD, 3)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Landroid/widget/AdapterView;Landroid/view/View;I)V", false)
                     } else if (mInterfaces.contains('android/widget/TabHost$OnTabChangeListener') && nameDesc == 'onTabChanged(Ljava/lang/String;)V') {
+                        //支持TabHost的点击事件
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackTabHost", "(Ljava/lang/String;)V", false)
                     } else if (mInterfaces.contains('android/widget/AdapterView$OnItemClickListener') && nameDesc == 'onItemClick(Landroid/widget/AdapterView;Landroid/view/View;IJ)V') {
+                        //支持ListView和GridView的点击事件
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitVarInsn(ALOAD, 2)
                         methodVisitor.visitVarInsn(ILOAD, 3)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Landroid/widget/AdapterView;Landroid/view/View;I)V", false)
                     } else if (mInterfaces.contains('android/widget/ExpandableListView$OnGroupClickListener') && nameDesc == 'onGroupClick(Landroid/widget/ExpandableListView;Landroid/view/View;IJ)Z') {
+                        //支持ExpandableListView,OnGroup的点击事件
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitVarInsn(ALOAD, 2)
                         methodVisitor.visitVarInsn(ILOAD, 3)
                         methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackExpandableListViewGroupOnClick", "(Landroid/widget/ExpandableListView;Landroid/view/View;I)V", false)
                     } else if (mInterfaces.contains('android/widget/ExpandableListView$OnChildClickListener') && nameDesc == 'onChildClick(Landroid/widget/ExpandableListView;Landroid/view/View;IIJ)Z') {
+                        //支持ExpandableListView,OnChild的点击事件
                         methodVisitor.visitVarInsn(ALOAD, 1)
                         methodVisitor.visitVarInsn(ALOAD, 2)
                         methodVisitor.visitVarInsn(ILOAD, 3)
@@ -230,7 +252,6 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
                 if (s == 'Lcom/sensorsdata/analytics/android/sdk/SensorsDataTrackViewOnClick;') {
                     isSensorsDataTrackViewOnClickAnnotation = true
                 }
-
                 return super.visitAnnotation(s, b)
             }
         }

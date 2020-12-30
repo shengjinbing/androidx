@@ -1,22 +1,14 @@
 package com.medi.androidxdevelop
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.appcompat.app.AppCompatActivity
 import com.medi.androidxdevelop.activitys.*
-import com.medi.androidxdevelop.leakcanary.HeapDump
 import com.medi.androidxdevelop.mvvm.MvvmActivity
 import com.sensorsdata.analytics.android.sdk.SensorsDataTrackViewOnClick
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +16,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        btn_asm.setOnClickListener {
+            startActivity(Intent(this, ASMTestActivity::class.java))
+        }
+        btn_mvvm.setOnClickListener {
+            startActivity(Intent(this, MvvmActivity::class.java))
+        }
         btn_mvvm.setOnClickListener {
             startActivity(Intent(this, MvvmActivity::class.java))
         }
@@ -46,10 +44,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SensorsDataTrackViewOnClick
-    fun testAnnotation(view: View) {
-        Toast.makeText(applicationContext, "测试asm", Toast.LENGTH_LONG).show()
-    }
 }
 
 

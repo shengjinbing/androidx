@@ -20,6 +20,13 @@ class SensorsAnalyticsClassModifier {
         exclude.add('com.sensorsdata.analytics.android.sdk')
     }
 
+    /**
+     * 修改jar包
+     * @param jarFile
+     * @param tempDir
+     * @param nameHex
+     * @return
+     */
     static File modifyJar(File jarFile, File tempDir, boolean nameHex) {
         /**
          * 读取原 jar
@@ -72,14 +79,27 @@ class SensorsAnalyticsClassModifier {
         return outputJar
     }
 
+    /**
+     * 修改class
+     * @param srcClass
+     * @return
+     * @throws IOException
+     */
     private static byte[] modifyClass(byte[] srcClass) throws IOException {
+        //该类主要用来重新构建编译后的类，比如修改类名、属性以及方法，甚至可以生成新的类字节码文件。
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS)
         ClassVisitor classVisitor = new SensorsAnalyticsClassVisitor(classWriter)
+        //主要是用来解析编译过的.class字节码文件文件
         ClassReader cr = new ClassReader(srcClass)
         cr.accept(classVisitor, ClassReader.SKIP_FRAMES)
         return classWriter.toByteArray()
     }
 
+    /**
+     * 过滤一些class文件提高编译速度
+     * @param className
+     * @return
+     */
     protected static boolean isShouldModify(String className) {
         Iterator<String> iterator = exclude.iterator()
         while (iterator.hasNext()) {

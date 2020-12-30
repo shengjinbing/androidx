@@ -11,6 +11,7 @@ import com.android.build.api.transform.TransformInput
 import com.android.build.api.transform.TransformInvocation
 import com.android.build.api.transform.TransformOutputProvider
 import com.android.build.gradle.internal.pipeline.TransformManager
+import com.sensorsdata.analytics.android.plugin.extension.SensorsAnalyticsExtension
 import groovy.io.FileType
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
@@ -71,22 +72,39 @@ class SensorsAnalyticsTransform extends Transform {
 
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
-        _transform(transformInvocation.context, transformInvocation.inputs, transformInvocation.outputProvider, transformInvocation.incremental)
+        _transform(transformInvocation.context,
+                transformInvocation.inputs,
+                transformInvocation.outputProvider,
+                transformInvocation.incremental)
     }
 
-    void _transform(Context context, Collection<TransformInput> inputs, TransformOutputProvider outputProvider, boolean isIncremental) throws IOException, TransformException, InterruptedException {
+    /**
+     * 即使什么也不做也需要把所以输入文件拷贝到目录目录下，否则下一个Task就没有TransfromInput了。
+     * @param context
+     * @param inputs
+     * @param outputProvider
+     * @param isIncremental
+     * @throws IOException
+     * @throws TransformException
+     * @throws InterruptedException
+     */
+    void _transform(Context context, Collection<TransformInput> inputs, TransformOutputProvider outputProvider,
+                    boolean isIncremental) throws IOException, TransformException, InterruptedException {
         if (!incremental) {
             outputProvider.deleteAll()
         }
 
         /**Transform 的 inputs 有两种类型，一种是目录，一种是 jar 包，要分开遍历 */
-        inputs.each { TransformInput input ->
+        inputs.each {input ->
             /**遍历目录*/
             input.directoryInputs.each { DirectoryInput directoryInput ->
                 /**当前这个 Transform 输出目录*/
-                File dest = outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
+                File dest = outputProvider.getContentLocation(
+                        directoryInput.name,
+                        directoryInput.contentTypes,
+                        directoryInput.scopes,
+                        Format.DIRECTORY)
                 File dir = directoryInput.file
-
                 if (dir) {
                     HashMap<String, File> modifyMap = new HashMap<>()
                     /**遍历以某一扩展名结尾的文件*/
@@ -104,6 +122,10 @@ class SensorsAnalyticsTransform extends Transform {
                                 }
                             }
                     }
+                    /**
+                     *这里是将修改的class文件放到一个hashmap对象中。然后将输入目录下的所有class文件拷贝到输出目录，最后再将
+                     * HashMap中修改过的.class文件拷贝到输出目录，覆盖之前拷贝的.class（原.class文件）。
+                     */
                     FileUtils.copyDirectory(directoryInput.file, dest)
                     modifyMap.entrySet().each {
                         Map.Entry<String, File> en ->

@@ -1,10 +1,9 @@
 package com.sensorsdata.analytics.android.plugin
 
 import com.android.build.gradle.AppExtension
+import com.sensorsdata.analytics.android.plugin.extension.SensorsAnalyticsExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.internal.reflect.Instantiator
-import org.gradle.invocation.DefaultGradle
 
 class SensorsAnalyticsPlugin implements Plugin<Project> {
     void apply(Project project) {

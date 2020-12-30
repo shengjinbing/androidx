@@ -7,10 +7,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
     <Button
-        android:id="@+id/btn_test"
+        android:id="@+id/btn_asm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:text="asm" />
     <Button
         android:id="@+id/btn_mvvm"
         android:layout_width="wrap_content"
