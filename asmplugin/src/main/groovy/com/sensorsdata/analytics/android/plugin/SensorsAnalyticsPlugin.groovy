@@ -7,7 +7,6 @@ import org.gradle.api.Project
 
 class SensorsAnalyticsPlugin implements Plugin<Project> {
     void apply(Project project) {
-
         SensorsAnalyticsExtension extension = project.extensions.create("sensorsAnalytics", SensorsAnalyticsExtension)
 
         //关闭埋点插件
