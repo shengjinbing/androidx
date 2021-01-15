@@ -14,6 +14,10 @@ import kotlinx.android.synthetic.main.activity_mvvm.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ *链接1：https://www.jianshu.com/p/03bd421925c9
+ *
+ */
 class MvvmActivity : BaseActivity() {
 
     private val viewModel: TestViewModel by lazy {
@@ -89,7 +93,7 @@ class MvvmActivity : BaseActivity() {
     private fun initListener() {
         btn_requset.setOnClickListener {
             Log.d("BBBBB", "开始请求")
-            viewModel.getFee()
+            viewModel.getFeeData()
         }
         tv_LifecycleOwner.setOnClickListener {
             startActivity(Intent(this, LifecycleActivity::class.java))

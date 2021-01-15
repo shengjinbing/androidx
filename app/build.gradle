@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'// 引入 android gradle 插件
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -14,7 +14,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
-    defaultConfig {
+    defaultConfig {// 版本，applicationId 等配置
         applicationId "com.medi.androidxdevelop"
         minSdkVersion 16
         targetSdkVersion 29

@@ -7,7 +7,6 @@ import android.content.Context
  * Describe:
  */
 object SingleInstance {
-
     var helper = Helper("张三")
 
     private lateinit var context:Context

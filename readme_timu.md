@@ -107,6 +107,7 @@
    
 19.为什么TCP要三次握手，两次不行吗？
   https://blog.csdn.net/lengxiao1993/article/details/82771768
+  https://juejin.cn/post/6844904158655414286#heading-27
   1.什么叫连接？
   2.TCP连接的建立和关闭
   3.长连接，什么叫长连接？长连接的实现方式：心跳（推送）

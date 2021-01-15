@@ -6,6 +6,13 @@
 3.binder机制原理
 4.art和darvlik区别
 5.multidex下如何保证打包到主dex  
+自动化测试原理
+launcher启动apk的过程以及中间各个进程的名字
+多cpu执行单线程和单cpu执行单线程的差异
+websocket的原理
+handler的delay是否按时执行
+微信各个页面适合什么启动模式
+apt是在编译中生成的类，怎么让外部调用（不能先编译）
   
   
   

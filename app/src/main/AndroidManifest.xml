@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitys.ASMTestActivity"></activity>
+        <activity android:name=".activitys.KotlinActivity"></activity>
+        <activity android:name=".activitys.ASMTestActivity" />
         <activity android:name=".activitys.CoroutinesActivity" />
         <activity android:name=".activitys.DataBindingActivity" />
         <activity android:name=".mvvm.WorkActivity" />

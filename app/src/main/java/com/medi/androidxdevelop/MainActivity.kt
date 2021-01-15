@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         btn_blockCannary.setOnClickListener {
             startActivity(Intent(this, BlockCanaryActivity::class.java))
         }
+        btn_kotlin.setOnClickListener {
+            startActivity(Intent(this, KotlinActivity::class.java))
+        }
+
     }
 
 }

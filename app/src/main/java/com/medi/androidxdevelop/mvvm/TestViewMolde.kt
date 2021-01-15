@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.medi.androidxdevelop.mvvm.entity.FeeEntity
+import com.medi.androidxdevelop.mvvm.repository.LoginRepository
 import com.medi.androidxdevelop.network.ApiService
 import com.medi.comm.network.result.awaitOrError
 import kotlinx.coroutines.async
@@ -19,13 +20,26 @@ import kotlinx.coroutines.launch
  */
 class TestViewModel : ViewModel() {
     var fee = MutableLiveData<MutableList<FeeEntity>>()
-    fun getFee(){
-        viewModelScope.launch{
-            val (data, netExecption) = async {  ApiService.apiService.getfee() }.awaitOrError()
+    var userName:MutableLiveData<String>? = null
+    var password:MutableLiveData<String>? = null
+
+    private var loginRepository: LoginRepository = LoginRepository()
+    init {
+        userName =MutableLiveData<String>("")
+        userName?.postValue(loginRepository.getUserNameFormCache())
+        password =MutableLiveData<String>("")
+    }
+    fun getFeeData() {
+        viewModelScope.launch {
+            val (data, netExecption) = async {
+                ApiService.apiService.getfee()
+                loginRepository.login(userName?.value.toString(), password?.value.toString())
+            }.awaitOrError()
             netExecption?.composeException { code, message ->
-                Log.d("BBBBB","code==${code}  message==${message}")
-            } ?: kotlin.run{
+                Log.d("BBBBB", "code==${code}  message==${message}")
+            } ?: kotlin.run {
                 fee.value = data?.data
+                password?.postValue(data?.data?.get(1)?.dictName)
             }
         }
     }

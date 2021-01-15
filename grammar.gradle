@@ -1,0 +1,438 @@
+/****************字符串相关*******************/
+task printStringClass << {
+    def str1 = '单引号单引号'
+    def str2 = 'shanu引号单引号'
+
+    println(str1.getClass().name)
+    println(str2.getClass().name)
+
+
+}
+
+task printStringVal << {
+    def str = 'zhangsan'
+
+    //单引号没有运算能力
+    println('haha:${str}')
+    println("haha:${str}")
+}
+
+/****************集合相关*******************/
+task printList << {
+    def numList = [1, 2, 3, 4, 5, 6]
+    //printIn(numList.getClass().name.toString())
+    print(numList.getClass().name.toString())
+    println(numList[1])//访问第一个元素
+    println(numList[-1])//访问最后一个元素
+    println(numList[-2])//访问倒数第二个元素
+    println(numList[1..3])//访问第二到第四个元素
+
+    //呆板写法
+    numList.each({ print it })
+    //格式化一下
+    numList.each({
+        print it
+    })
+    //groovy规定最后一个参数是闭包可以放到方法外面去
+    numList.each() {
+        print it
+    }
+    //然后方法可以省略，就变成我们经常写的样式
+    numList.each {
+        print it//必须是it这是闭包的知识
+    }
+
+}
+
+task printMap << {
+    def map1 = ['width': 1024, 'height': 768]
+    def name = map1.getClass().name;
+    println(name)
+
+    println(map1['width'])
+    println(map1['height'])
+
+    map1.each {
+        print "key:${it.key},Vaule:${it.value}"
+    }
+
+}
+/****************方法相关*******************/
+//括号可以省略
+task invokeMethod << {
+    method(1, 3)
+    method 1, 2
+}
+
+def method(int a, int b) {
+    print a + b
+}
+
+//return 是可以不写的 我们定义有返回值的方法时，return语句不是必须的，会把最后一句作为返回值
+task invokeMethodReturn << {
+    def c = method1 1, 3
+    def d = method1 3, 1
+    print c
+    print d
+
+}
+
+def method1(int a, int b) {
+    if (a > b) {
+        a
+    } else {
+        b;
+    }
+}
+
+//代码块可以传递，一段被花括号包围的代码，其实就闭包
+
+/****************方JavaBean相关*******************/
+task helloJavaBean << {
+    Person p = new Person()
+    println "名字是：${p.name}"
+    p.name = "张三"
+    println "名字是：${p.name}"
+    println "年龄是：${p.age}"
+
+
+}
+
+class Person {
+    private String name
+    //我们直接用getter和setter方法也可以直接当属性访问，但是没有setter方法不能修改age的值
+    public int getAge() {
+        12
+    }
+}
+
+/****************方闭包相关*******************/
+//虽然java有匿名类部类，但是还是一样冗余
+
+//初识闭包
+task helloClosure {
+    //使用我们自定义的闭包
+    customEach {
+        print it
+    }
+}
+
+def customEach(closure) {
+    for (int i in 1..10) {
+        closure(i)
+    }
+}
+
+//像闭包传递参数
+task helloClosureTwo << {
+    eachMap { k, v ->
+        println "${k} is ${v}"
+    }
+}
+
+def eachMap(closure) {
+    def map1 = ["name": "张三", "age": "18"]
+    map1.each {
+        closure(it.key, it.value)
+    }
+}
+//闭包委托
+
+task helloDelegate {
+    new Delegate().test {
+        println "thisObject this:${thisObject.getClass()}"
+        println "owner this:${owner.getClass()}"
+        println "delegate this:${delegate.getClass()}"
+
+        method2()
+        it.method2()
+
+    }
+}
+
+def method2() {
+    println "Context this:${this.getClass()} in root"
+    println "method2 in root"
+}
+
+class Delegate {
+    def method2() {
+        println "Delegate this:${this.getClass()} in Delegate"
+        println "method2 in Delegate"
+    }
+
+    def test(Closure<Delegate> closure) {
+        closure(this)
+    }
+}
+
+
+task configClosure << {
+    person1 {
+        personName = "张三"
+        personAge = 12;
+        dump()
+    }
+}
+
+class Person1 {
+    String personName
+    int personAge
+
+    def dumpPerson() {
+        FF "name is ${personName},age is ${personAge}"
+    }
+
+}
+
+def person1(Closure<Person1> closure) {
+    Person1 p = new Person1()
+    closure.delegate = p
+    //委托模式优先
+    closure.setResolveStrategy(Closure.DELEGATE_FIRST)
+    closure(p)
+}
+/****************第三章 Gradle构建脚本基础*******************/
+
+//创建一个Task任务
+tasks.create("customTask2") {
+    doFirst {
+        println("dsadsa")
+    }
+    doLast {
+        println "customTask2:doLast"
+    }
+}
+
+//任务依赖
+task ex35Hello << {
+    println "Hello"
+}
+task ex35World << {
+    println 'World'
+}
+
+task main(dependsOn: ex35Hello) {
+    doLast {
+        println 'main'
+
+    }
+
+}
+task mainMultiTask(dependsOn: ex35Hello) {
+    dependsOn ex35Hello, ex35World
+    doLast {
+        println 'mainMultiTask'
+    }
+
+}
+
+//任务间通过API控制，交互
+task ex36Hello << {
+    println "dowLast1"
+}
+
+ex36Hello.doFirst{
+    println "doFirst"
+
+}
+ex36Hello.doLast{
+    println project.hasProperty('ex36Hello')//每个任务都是Project的一个属性
+    println "doFirst2"
+
+}
+
+//自定义属性
+
+//自定义一个Project属性
+ext.age = 18;
+
+//通过代码块同时定义多个属性
+ext{
+    phone = 123456
+    address = ''
+}
+
+sourceSets.all {
+    ext.resourcesDir = null;
+}
+sourceSets{
+    main{
+        resourcesDir = 'main/res'
+    }
+    test{
+        resourcesDir = 'test/res'
+
+    }
+}
+task ex37CustomProperty <<{
+    println "年龄是： ${age}"
+    println "电话是： ${phone}"
+    println "地址是： ${address}"
+
+    sourceSets.each {
+        println "${it.name}的resourcesDir是:${it.resourcesDir}"
+    }
+}
+//脚本即代码，代码即脚本
+def buildTime(){
+    Date date = new Date()
+    def format = date.format("yyyyMMdd")
+    return  format.toString();
+}
+
+task testtime{
+
+    def time = buildTime();
+    println(time);
+}
+//第四章：gradle任务
+
+//4.2多种方式访问任务
+task ex42AccessTask1
+
+ex42AccessTask1.doLast{
+    println "ex42AccessTask1.doLast"
+}
+
+//以访问集合元素的方式访问我们创建的任务
+task ex42AccessTask2
+tasks['ex42AccessTask2'].doLast{
+    println "ex42AccessTask12.doLast"
+}
+
+//任务分组和描述
+def Task myTask = task ex43GroupTask
+myTask.group = BasePlugin.BUILD_GROUP;
+myTask.description = '这是一个构建的引导任务'
+myTask.doLast {
+    println "group:${group},description:${description}"
+}
+
+//任务的执行分析
+def Task myTask1 = task ex45CustomTask(type:CustomTask )
+myTask1.doFirst {
+    println 'doFirst'
+}
+myTask1.doLast {
+    println 'doLast'
+
+}
+/*class CustomTask extends DefaultTask{
+    @TaskAction
+    def doself(){
+        println 'doself'
+
+    }
+}*/
+//任务的排序 shouldRunAfter ,mustRunAfter
+task ex46OrderTask1 << {
+    println 'ex46OrderTask1'
+}
+task ex46OrderTask2 << {
+    println 'ex46OrderTask2'
+}
+ex46OrderTask1.mustRunAfter ex46OrderTask2
+
+//任务的启用和禁用
+
+task ex47DisenabledTask <<{
+    println 'ex47DisenabledTaskssssssss'
+}
+ex47DisenabledTask.enabled = false
+
+//任务的onlyIf断言
+//gradlew -Pbuild_apps=all buildDabao 命令-P的意思是Project指定K-V格式的属性
+//键值对，使用格式为-PK=V
+
+final String BUILD_APPS_ALL="all";
+final String BUILD_APPS_SHOUFA="shoufa";
+final String BUILD_APPS_EXCLUDE_SHOUFA="exclude_shoufa";
+
+task ex48QQRelease << {
+    println '打应用宝的包'
+}
+task ex48BaiduRelease << {
+    println '打百度的包'
+}
+task ex48HuaweiRelease << {
+    println '打华为的包'
+}
+task ex48MimuRelease << {
+    println '打MIMU的包'
+}
+
+task buildDabao{
+    group BasePlugin.BUILD_GROUP
+    description "打渠道包"
+}
+
+buildDabao.dependsOn ex48QQRelease,ex48BaiduRelease,ex48HuaweiRelease,ex48MimuRelease
+
+//是true就执行
+ex48QQRelease.onlyIf{
+    def execute = false;
+    if(project.hasProperty("build_apps")){
+        println 'ex48QQRelease'
+        Object buildApps = project.property("build_apps")
+        if(BUILD_APPS_SHOUFA.equals(buildApps) ||
+                BUILD_APPS_ALL.equals(buildApps)){
+            execute = true
+        }else{
+            execute = false;
+        }
+    }else {
+        println 'ex48QQRelease8888'
+
+        execute = true
+    }
+    execute
+}
+//是true就执行
+ex48BaiduRelease.onlyIf{
+    def execute = false;
+    if(project.hasProperty("build_apps")){
+        Object buildApps = project.property("build_apps")
+        if(BUILD_APPS_EXCLUDE_SHOUFA.equals(buildApps) ||
+                BUILD_APPS_ALL.equals(buildApps)){
+            execute = true
+        }else{
+            execute = false;
+        }
+    }else {
+        execute = true
+    }
+    execute
+}
+//是true就执行
+ex48HuaweiRelease.onlyIf{
+    def execute = false;
+    if(project.hasProperty("build_apps")){
+        Object buildApps = project.property("build_apps")
+        if(BUILD_APPS_SHOUFA.equals(buildApps) ||
+                BUILD_APPS_ALL.equals(buildApps)){
+            execute = true
+        }else{
+            execute = false;
+        }
+    }else {
+        execute = true
+    }
+    execute
+}
+//是true就执行
+ex48MimuRelease.onlyIf {
+    def execute = false;
+    if (project.hasProperty("build_apps")) {
+        Object buildApps = project.property("build_apps")
+        if (BUILD_APPS_SHOUFA.equals(buildApps) ||
+                BUILD_APPS_ALL.equals(buildApps)) {
+            execute = true
+        } else {
+            execute = false;
+        }
+    } else {
+        execute = true
+    }
+    execute
+}

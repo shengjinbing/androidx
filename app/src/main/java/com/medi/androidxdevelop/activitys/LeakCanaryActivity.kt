@@ -10,6 +10,8 @@ import leakcanary.AppWatcher
 /**
  * https://square.github.io/leakcanary/
  * https://mp.weixin.qq.com/s?__biz=MzA5ODQ1ODU5NA==&mid=2247484037&idx=1&sn=5745ee913af677fee192bac77507d418&chksm=90900c08a7e7851ec4bf6f2b3a9af3406c9ab78402722dc623409b949ad683c1d7aa084cca57&token=1449112143&lang=zh_CN#rd
+ * Android 性能监控框架 Matrix（3）Hprof 文件分析
+ * https://juejin.cn/post/6854573208520097799
  * 内部使用的堆文件分析器：
  * 1.堆文件分析器使用的库是haha（1.0版本）
  * 2.堆文件分析器使用的库是shark（解决堆文件占用内存过大问题2.0版本）
@@ -37,22 +39,31 @@ import leakcanary.AppWatcher
  * 3.AppWatcherInstaller : ContentProvider()通过在AndroidManifest文件中注册，在onCreate()方法实现自动安装。
  *
  */
+
+
 class LeakCanaryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_leak_canary)
         //第一个内存泄露的例子，单例持有Activity的引用
-        //SingleInstance.setContext(this)
+        SingleInstance.setContext(this)
         //手动观察
-        SingleInstance.helper.name = "李四"
+        //SingleInstance.helper.name = "李四"
+        val arrayList = ArrayList<String>()
+        with(ArrayList<String>()){
+
+        }
+        arrayList.let {
+
+        }
 
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        AppWatcher.objectWatcher.expectWeaklyReachable(SingleInstance.helper,"helpex泄露了吗")
-        HeapDump.createDumpFile(this)
+        //AppWatcher.objectWatcher.expectWeaklyReachable(SingleInstance.helper,"helpex泄露了吗")
+        //HeapDump.createDumpFile(this)
     }
 }
 
