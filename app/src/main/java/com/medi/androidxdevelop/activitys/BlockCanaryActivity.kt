@@ -49,7 +49,7 @@ import kotlinx.android.synthetic.main.activity_block_canary.*
  *
  * @property TAG String
  */
-class BlockCanaryActivity : AppCompatActivity() {
+open class BlockCanaryActivity : AppCompatActivity() {
     private val TAG:String = "BlockCanary_log"
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     override fun onCreate(savedInstanceState: Bundle?) {

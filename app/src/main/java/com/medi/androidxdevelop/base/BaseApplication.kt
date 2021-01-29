@@ -1,18 +1,16 @@
 package com.medi.androidxdevelop.base
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.multidex.MultiDex
 import com.github.moduth.blockcanary.BlockCanary
-import com.github.moduth.blockcanary.BlockCanaryContext
+import com.medi.androidxdevelop.BuildConfig
 import com.medi.androidxdevelop.leakcanary.LeakUploader
 import com.meituan.android.walle.WalleChannelReader
 import com.sensorsdata.analytics.android.sdk.SensorsDataAPI
-import leakcanary.AppWatcher
-import leakcanary.AppWatcher.config
+import com.tencent.mars.xlog.Log
+import com.tencent.mars.xlog.Xlog
 import leakcanary.LeakCanary
-import leakcanary.LeakCanary.config
 
 
 /**
@@ -39,6 +37,11 @@ import leakcanary.LeakCanary.config
 一句话总结：凡是跟UI相关的，都应该使用Activity做为Context来处理；其他的一些操作，Service,Activity,Application等实例都可以，当然了，注意Context引用的持有，防止内存泄漏。
  */
 class BaseApplication : Application() {
+    init {
+        System.loadLibrary("c++_shared")
+        System.loadLibrary("marsxlog")
+    }
+
     override fun onCreate() {
         super.onCreate()
         MultiDex.install(this);
@@ -49,8 +52,36 @@ class BaseApplication : Application() {
         //ASM
         initASMSensorsDataAPI(this)
         //BlockCanary
-        BlockCanary.install(this, BlockCanaryContext()).start()
+        BlockCanary.install(this, AppBlockCanaryContext()).start()
         initLeakCanary()
+        initXlog()
+    }
+
+
+    private fun initXlog() {
+        val logPath = "${getExternalFilesDir(null)?.absolutePath}/marssample/log"
+        android.util.Log.d("BBBBB",logPath)
+        // cachePath这个参数必传，而且要data下的私有文件目录，例如 /data/data/packagename/files/xlog，
+        // mmap文件会放在这个目录，如果传空串，可能会发生 SIGBUS 的crash。
+        val cachePath = "${filesDir}/xlog"
+        //init xlog
+        /*var logConfig = Xlog.XLogConfig()
+        logConfig.mode = Xlog.AppednerModeAsync
+        logConfig.logdir = logPath
+        logConfig.cachedir = cachePath
+        logConfig.nameprefix = "logFileName"
+        logConfig.pubkey = ""
+        logConfig.compressmode = Xlog.ZLIB_MODE
+        logConfig.compresslevel = 1
+        logConfig.cachedays = 1*/
+        Log.setLogImp(Xlog())
+        if (BuildConfig.DEBUG) {
+            Log.setConsoleLogOpen(true)
+            Log.appenderOpen(Xlog.LEVEL_DEBUG, Xlog.AppednerModeAsync, "", logPath, "logFileName", 0)
+        } else {
+            Log.setConsoleLogOpen(false)
+            Log.appenderOpen(Xlog.LEVEL_INFO, Xlog.AppednerModeAsync, "", logPath, "logFileName", 0)
+        }
     }
 
     /**
@@ -92,6 +123,5 @@ class BaseApplication : Application() {
     private fun initASMSensorsDataAPI(application: Application) {
         SensorsDataAPI.init(application)
     }
-
 
 }
