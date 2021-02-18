@@ -1,5 +1,6 @@
 package com.medi.androidxdevelop.activitys
 
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
@@ -7,7 +8,12 @@ import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.createDataStore
+import com.hi.dhl.datastore.protobuf.PersonProtos
 import com.medi.androidxdevelop.R
+import com.medi.androidxdevelop.activitys.ui.XLogActivity
+import com.medi.androidxdevelop.base.ApplicationContext
 import com.sensorsdata.analytics.android.sdk.SensorsDataTrackViewOnClick
 import kotlinx.android.synthetic.main.activity_a_s_m_test.*
 

@@ -165,5 +165,11 @@ dependencies {
     //xlog日志 目前使用自己编译的
     //implementation 'com.tencent.mars:mars-core:1.2.5'
     //implementation 'com.tencent.mars:mars-xlog:1.2.5'
+    implementation 'com.tencent:mmkv-static:1.2.7'
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha06"
+    implementation "androidx.datastore:datastore:1.0.0-alpha06"
+    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
+    implementation project(':common-protobuf')
+
 
 }

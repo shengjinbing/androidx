@@ -20,6 +20,8 @@ buildscript {// 配置脚本的 classpath
         classpath 'com.medi.plugin:myplugin:1.0.1'
         //多渠道打包
         classpath 'com.meituan.android.walle:plugin:1.1.6'
+        //protobuf
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.14'
     }
 }
 //1、 buildscript里是gradle脚本执行所需依赖，分别是对应的maven库和插件

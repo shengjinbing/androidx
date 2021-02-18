@@ -10,6 +10,7 @@ import com.meituan.android.walle.WalleChannelReader
 import com.sensorsdata.analytics.android.sdk.SensorsDataAPI
 import com.tencent.mars.xlog.Log
 import com.tencent.mars.xlog.Xlog
+import com.tencent.mmkv.MMKV
 import leakcanary.LeakCanary
 
 
@@ -55,8 +56,13 @@ class BaseApplication : Application() {
         BlockCanary.install(this, AppBlockCanaryContext()).start()
         initLeakCanary()
         initXlog()
+        initMmvk()
     }
 
+    private fun initMmvk(){
+        val rootDir = MMKV.initialize(this)
+        println("mmkv root: $rootDir")
+    }
 
     private fun initXlog() {
         val logPath = "${getExternalFilesDir(null)?.absolutePath}/marssample/log"

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "com.hi.dhl.datastore.protobuf";
+option java_outer_classname = "PersonProtos";
+
+message Person {
+    // 格式：字段类型 + 字段名称 + 字段编号
+    string name = 1;
+}

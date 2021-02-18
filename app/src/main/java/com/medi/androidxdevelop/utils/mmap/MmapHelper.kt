@@ -1,5 +1,6 @@
 package com.medi.androidxdevelop.utils.mmap
 
+import java.io.File
 import java.io.RandomAccessFile
 import java.lang.reflect.Method
 import java.nio.MappedByteBuffer
@@ -11,14 +12,12 @@ import java.nio.channels.FileChannel
  */
 class MmapHelper {
 
-    public fun map(log: String) {
-       /* val raf = RandomAccessFile(file, "rw")
+    public fun map(log: String,path:String,position:Long,size:Long) {
+        val raf = RandomAccessFile(File(path), "rw")
         //position映射文件的起始位置，size映射文件的大小
-        val buffer: MappedByteBuffer =
-            raf.getChannel().map(FileChannel.MapMode.READ_WRITE, position, size)
+        val buffer: MappedByteBuffer = raf.channel.map(FileChannel.MapMode.READ_WRITE, position, size)
         //往缓冲区里写入字节数据
-        buffer.put(log.toByte())*/
-
+        buffer.put(log.toByte())
     }
 
     /**
