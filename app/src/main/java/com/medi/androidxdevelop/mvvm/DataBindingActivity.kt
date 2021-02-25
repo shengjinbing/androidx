@@ -1,11 +1,10 @@
-package com.medi.androidxdevelop.activitys
+package com.medi.androidxdevelop.mvvm
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.medi.androidxdevelop.R
 import com.medi.androidxdevelop.databinding.ActivityDataBindingBinding
-import com.medi.androidxdevelop.mvvm.TestViewModel
 import com.medi.androidxdevelop.mvvm.entity.User
 
 class DataBindingActivity : AppCompatActivity() {

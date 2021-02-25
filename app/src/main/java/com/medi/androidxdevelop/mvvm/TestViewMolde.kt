@@ -17,6 +17,13 @@ import kotlinx.coroutines.launch
 /**
  * 1.为应用中的每个 ViewModel 定义了 ViewModelScope。如果 ViewModel 已清除，则在此范围内启动的协
  * 程都会自动取消。如果您具有仅在 ViewModel 处于活动状态时才需要完成的工作，此时协程非常有用。
+ *
+ * 主要类说明：
+ * ViewModelProvider：ViewModel提供者
+ * ViewModelStore：ViewModel缓存管理
+ * ViewModelProvider.Factory：ViewModel创建工厂
+ * SavedStateViewModelFactory：ViewModel创建工厂的实现
+ * NewInstanceFactory：普通ViewModel创建工厂的实现
  */
 class TestViewModel : ViewModel() {
     var fee = MutableLiveData<MutableList<FeeEntity>>()
@@ -43,7 +50,6 @@ class TestViewModel : ViewModel() {
             }
         }
     }
-
 
     //初始化ViewModel
     companion object {

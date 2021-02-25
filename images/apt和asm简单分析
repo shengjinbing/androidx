@@ -1,0 +1,62 @@
+apt依赖库：
+ 1.JavaPoet 是 square 开源的 Java 代码生成框架，可以很方便地通过其提供的 API 来生成指定格式
+ （修饰符、返回值、参数、函数体等）的代码。
+ 2.auto-service 是由 Google 开源的注解注册处理器实际上，上面两个依赖库并不是必须的，
+ 可以通过硬编码代码生成规则来替代，但还是建议使用这两个库，因为这样代码的可读性会更高，且能提高开发效率
+ implementation 'com.google.auto.service:auto-service:1.0-rc6'
+ implementation 'com.squareup:javapoet:1.13.0'
+
+ 3. RetentionPolicy.SOURCE 注解只在源码阶段保留，在编译器进行编译时它将被丢弃忽视。
+    源码注解(RetentionPolicy.SOURCE)的生命周期只存在Java源文件这一阶段，是3种生命周期中最短的注解。
+    当在Java源程序上加了一个注解，这个Java源程序要由javac去编译，javac把java源文件编译成.class文件，
+    在编译成class时会把Java源程序上的源码注解给去掉。需要注意的是，在编译器处理期间源码注解还存在，即注解
+    处理器Processor也能处理源码注解，编译器处理完之后就没有该注解信息了。一般使用CLASS注解(重点)
+
+ @AutoService(Processor.class)//表明当前类是一个注解处理器,如果不使用这个注解进行标注就需要在resources里面进行声明
+ public class BindViewProcessor extends AbstractProcessor{
+     /**
+      * 指定这个注解处理器是注册给哪个注解的.
+      * 也可以通过给BindViewProcessor添加@SupportedAnnotationTypes注解标记.
+      *
+      * @return
+      */
+     @Override
+     public Set<String> getSupportedAnnotationTypes() {
+         Set<String> hashSet = new HashSet<>();
+         //获取的是zengqiang.Log4jTest.Innr;getName()获取的是zengqiang.Log4jTest$Innr
+         hashSet.add(BindViewC.class.getCanonicalName());
+         return hashSet;
+     }
+
+     //核心方法，用于处理包含指定注解对象的代码元素
+     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+     }
+
+ }
+
+
+
+ASM使用流程：
+1.配置插件路径src/main/resources/META-INF/gradle-plugins/com.sensorsdata.android.properties
+2.class SensorsAnalyticsPlugin implements Plugin<Project> {
+    void apply(Project project) {
+     //注册自定义Transform
+      AppExtension appExtension = project.extensions.findByType(AppExtension.class)
+      appExtension.registerTransform(new SensorsAnalyticsTransform(project, extension))
+    }
+}
+3.核心方法 Transform 的 inputs 有两种类型，一种是目录，一种是 jar 包，要分开遍历 *
+void transform(TransformInvocation transformInvocation){
+
+}
+4.private static byte[] modifyClass(byte[] srcClass) throws IOException {
+          //该类主要用来重新构建编译后的类，比如修改类名、属性以及方法，甚至可以生成新的类字节码文件。
+          ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS) 继承ClassVisitor
+          ClassVisitor classVisitor = new SensorsAnalyticsClassVisitor(classWriter)
+          //主要是用来解析编译过的.class字节码文件文件
+          ClassReader cr = new ClassReader(srcClass)
+          cr.accept(classVisitor, ClassReader.SKIP_FRAMES)
+          return classWriter.toByteArray()
+ }
+5. ClassVisitor主要负责"拜访"类成员信息。其中包括标记在类上的注解、类的构造方法、类的字段、类的方法、静态代码块等。
+

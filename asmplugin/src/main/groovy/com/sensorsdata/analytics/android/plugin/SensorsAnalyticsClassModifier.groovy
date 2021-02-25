@@ -87,6 +87,7 @@ class SensorsAnalyticsClassModifier {
      */
     private static byte[] modifyClass(byte[] srcClass) throws IOException {
         //该类主要用来重新构建编译后的类，比如修改类名、属性以及方法，甚至可以生成新的类字节码文件。
+        //继承ClassVisitor
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS)
         ClassVisitor classVisitor = new SensorsAnalyticsClassVisitor(classWriter)
         //主要是用来解析编译过的.class字节码文件文件

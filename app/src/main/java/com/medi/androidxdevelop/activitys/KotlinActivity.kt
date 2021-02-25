@@ -18,8 +18,56 @@ import java.io.File
  * 4.构造函数有哪几种
  *   1.主构造函数跟在类后面
  *   2.次构造函数不限
- * 5.协程
+ *
+ *
+ * 5.协程 https://juejin.cn/post/6844904037586829320
+ * 1.什么是协程
+ * 协程是协作式任务, 线程是抢占式任务, 本质上两者都属于并发
+ * Kotlin协程就是线程库不是协程? 内部代码用的线程池?
+ * 最知名的协程语言Go内部也是维护了线程, 他也不是协程了?
+ * 协程只是方便开发者处理异步, 线程才能提升性能效率, 两者本身不是替换关系没有说用了谁就不用另一个了
+ * 2.协程是一种概念, 无关乎具体实现方式
+ * kotlin标准库中的协程不包含线程池代码, 仅扩展库才内部处理了线程池
+ * 3.协程设计来源
+ * Kotlin的协程完美复刻了谷歌的Go语言的协程设计模式(作用域/channel/select), 将作用域用对象来具化出来; 且可以更好地控制作用域生命周期;
+ * await模式(JavaScript的异步任务解决方案)
+ * Kotlin参考RxJava响应式框架创造出Flow
+ * 使用协程开始就不需要考虑线程的问题, 只需要在不同场景使用不同的调度器(调度器会对特定任务进行优化)就好
+ * 协程优势
+ * 并发实现方便
+ * 没有回调嵌套发生, 代码结构清晰
+ * 创建协程性能开销优于创建线程, 一个线程可以运行多个协程, 单线程即可异步
+ *
+ * 调用的两种方式
+ * launch: 异步并发, 没有返回结果
+ * async: 异步并发, 有返回结果
+ *
+ * 1.第一个参数 CoroutineContext上下文
+ * 调度器Dispatchers继承自CoroutineContext, 该枚举拥有三个实现; 表示不同的线程调度; 当函数不使用调度器时承接当前作用域的调度器
+ * Dispatchers.Unconfined 不指定线程, 如果子协程切换线程那么接下来的代码也运行在该线程上
+ * Dispatchers.IO 适用于IO读写
+ * Dispatchers.Main 根据平台不同而有所差, Android上为主线程
+ * Dispatchers.Default 默认调度器, 在线程池中执行协程体, 适用于计算操作
+ * 2.第二个参数 CoroutineStart
+ *
+ *
+ *
+ * 热数据通道Channel，实际上就是一个并发安全队列
+ * 冷流数据Flow，Flow就是Kotlin协程与响应式编程模型结合的产物。所谓的冷流数据就是只有消费时才会产生的数据流，这一点和channel
+ * 不正好相反，Channel的接收端不依赖与发送端
+ *
  */
+//协程的创建
+/*public fun CoroutineScope.launch(
+    context: CoroutineContext = EmptyCoroutineContext,
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    block: suspend CoroutineScope.() -> Unit
+): Job {
+    。。。省略代码。。。
+    return coroutine
+}*/
+
+
 class KotlinActivity : AppCompatActivity() {
     private var select = true
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,8 +91,7 @@ class KotlinActivity : AppCompatActivity() {
         }.text = "李想"
 
         //with(T)函数，而另一个则是使用了T.run函数
-        with(tv_text){
-
+        var c = with(tv_text){
         }
         //可以进行null判断
         tv_text?.run {
@@ -59,14 +106,13 @@ class KotlinActivity : AppCompatActivity() {
         //从上面两段代码可以看出T.let和T.also的返回值使不同的。T.let返回的是作用域中的最后一个对象，它的值和类型都可以改变
         // 。但是T.also不管调用多少次返回的都是原来的original对象。
         val original = "abc"
-        original.let {
+        val a = original.let {
             println("The original String is $it") // "abc"
             it.reversed()
-        }.let {
+        }
+        val b = original.let {
             println("The reverse String is $it") // "cba"
             it.length
-        }.let {
-            println("The length of the String is $it") // 3
         }
         original.also {
             println("The original String is $it") // "abc"
@@ -76,6 +122,9 @@ class KotlinActivity : AppCompatActivity() {
             it.length
         }.also {
             println("The length of the String is ${it}") // "abc"
+        }
+        original.apply {
+
         }
 
     }

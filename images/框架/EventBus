@@ -1,0 +1,16 @@
+1.因为register是强引用，它会让对象无法得到内存回收，导致内存泄露。所以必须在unregister方法中释放对象所占的内存。
+
+1、EventBus2.x使用的是运行时注解，它采用了反射的方式对整个注册的类的所有方法进行扫描来完成注册，因而会对性能有一定影响。
+2、EventBus3.x使用的是编译时注解，Java文件会编译成.class文件，再对class文件进行打包等一系列处理。在编译成.class文件时，EventBus会使用EventBusAnnotationProcessor注解处理器读取@Subscribe()注解并解析、处理其中的信息，然后生成Java类来保存所有订阅者的订阅信息。这样就创建出了对文件或类的索引关系，并将其编入到apk中。
+3、从EventBus3.0开始使用了对象池缓存减少了创建对象的开销
+
+https://juejin.cn/post/6844904082747080717
+
+配置索引
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+        //eventbus
+        arg('eventBusIndex', 'com.example.wangtianxiang.eventbusdemo.MyEventBusIndex')
+    }
+}

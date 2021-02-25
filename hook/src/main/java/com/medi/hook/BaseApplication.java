@@ -21,6 +21,5 @@ public class BaseApplication extends Application {
             e.printStackTrace();
             Log.d(AMSHookHelper.TAG, String.valueOf(e.getCause()));
         }*/
-
     }
 }

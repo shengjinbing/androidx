@@ -16,14 +16,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitys.ui.XLogActivity"></activity>
+        <activity android:name=".activitys.ui.ImageActivity"></activity>
+        <activity android:name=".activitys.ui.XLogActivity" />
         <activity
             android:name=".ui.login.XLogActivity"
             android:label="@string/title_activity_x_log" />
         <activity android:name=".activitys.KotlinActivity" />
         <activity android:name=".activitys.ASMTestActivity" />
         <activity android:name=".activitys.CoroutinesActivity" />
-        <activity android:name=".activitys.DataBindingActivity" />
+        <activity android:name=".mvvm.DataBindingActivity" />
         <activity android:name=".mvvm.WorkActivity" />
         <activity android:name=".mvvm.LifecycleActivity" />
         <activity android:name=".activitys.BlockCanaryActivity" />

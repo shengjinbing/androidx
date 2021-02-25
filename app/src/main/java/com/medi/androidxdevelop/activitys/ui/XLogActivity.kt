@@ -24,6 +24,7 @@ import java.io.OutputStream
 
 
 /**
+ * mars的xlog
  * https://juejin.cn/post/6850418121279438855
  * 1.cacheDir 设置缓存目录
  *缓存目录，当 logDir 不可写时候会写进这个目录，可选项，不选用请给 ""， 如若要给，建议给应用的 /data/data/packname/files/log 目录。
@@ -41,6 +42,11 @@ import java.io.OutputStream
  * Proto DataStore 将数据作为自定义数据类型的实例进行存储。此实现要求您使用协议缓冲区来定义架构，但可以确保类型安全。
  * 1.Preferences DataStore 实现使用 DataStore 和 Preferences 类将简单的键值对保留在磁盘上。
  * 2.Proto DataStore 实现使用 DataStore 和协议缓冲区将类型化的对象保留在磁盘上。
+ *
+ * Protobuf | 安装 Gradle 插件编译 proto 文件
+ * https://hi-dhl.com/2020/10/28/jetpack/05-probuff-AndroidStudio
+ * https://mp.weixin.qq.com/s/lvl2LBJP2yuQ4OpzzDA30w 再见 SharedPreferences ，Jetpack DataStore 第二种实现方式
+ * 官方也无力回天？“SharedPreferences 存在什么问题？https://mp.weixin.qq.com/s/cyouNcCkC0yCMGK0doLENQ
  */
 class XLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +70,6 @@ class XLogActivity : AppCompatActivity() {
         )
     }
 
-    //https://mp.weixin.qq.com/s/lvl2LBJP2yuQ4OpzzDA30w 再见 SharedPreferences ，Jetpack DataStore 第二种实现方式
     private fun initProtoDataStore(){
 
     }
@@ -140,6 +145,14 @@ class XLogActivity : AppCompatActivity() {
      * 考虑到主要使用场景是频繁地进行写入更新，我们需要有增量更新的能力。我们考虑将增量 kv 对象序列化后，append 到内存末尾。
      * 空间增长
      * 使用 append 实现增量更新带来了一个新的问题，就是不断 append 的话，文件大小会增长得不可控。我们需要在性能和空间上做个折中。
+     *
+     * 1.Client 与 Server 处于不同进程有着不同的虚拟地址规则，所以无法直接通信。而一个页框可以映射给多个页，那么就可以将
+     * 一块物理内存分别与 Client 和 Server 的虚拟内存块进行映射。
+     * 如图， Client 就只需 copy_from_user 进行一次数据拷贝，Server 进程就能读取到数据了。另外映射的虚拟内存块大小将
+     * 近 1M (1M-8K)，所以 IPC 通信传输的数据量也被限制为此值。
+     * 2.怎么理解页框和页？
+     * 页框是指一块实际的物理内存，页是指程序的一块内存数据单元。内存数据一定是存储在实际的物理内存上，即页必然对应于一个页框，页数据实际是存储在页框上的。
+     * 页框和页一样大，都是内核对内存的分块单位。一个页框可以映射给多个页，也就是说一块实际的物理存储空间可以映射给多个进程的多个虚拟内存空间，这也是 mmap 机制依赖的基础规则。
      */
     private fun initData() {
         val kv = MMKV.defaultMMKV()!!

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="8dp"
+    android:height="8dp"
+    android:viewportHeight="24.0"
+    android:viewportWidth="24.0">
+    <path
+        android:fillColor="#ffffff"
+        android:pathData="M12,4l-1.41,1.41L16.17,11H4v2h12.17l-5.58,5.59L12,20l8,-8z"/>
+</vector>
+<!--
+width, height：图片的宽高。可手动修改到需要尺寸；
+viewportHeight, viewportWidth：对应将上面height width等分的份数。以svg_ic_arrow_right.xml举例，可以想象将长宽都为8dp的正方形均分为24x24的网格，在这个网格中就可以很方便地描述点的坐标，图像就是这些点连接起来构成的。
+fillColor：填充颜色。最好直接在这里写明色值#xxxxxxxx，而不要用@color/some_color的形式，避免某些5.0以下机型可能会报错。
+pathData：在2中描述的网格中作画的路径。具体语法不是本文的重点，故不展开。
+
+Android使用矢量图（SVG, VectorDrawable）实践篇
+链接：https://www.jianshu.com/p/0555b8c1d26a
+阿里的iconfont https://www.iconfont.cn/
+svg2VectorDrawable插件
+    -->

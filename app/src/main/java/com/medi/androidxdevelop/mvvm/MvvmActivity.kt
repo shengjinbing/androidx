@@ -4,17 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.*
 import com.medi.androidxdevelop.R
-import com.medi.androidxdevelop.activitys.DataBindingActivity
 import com.medi.androidxdevelop.base.BaseActivity
 import com.medi.androidxdevelop.mvvm.life.TestLife
 import kotlinx.android.synthetic.main.activity_mvvm.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
+ * 一文搞懂Android JetPack组件原理之Lifecycle、LiveData、ViewModel与源码分析技巧
  *链接1：https://www.jianshu.com/p/03bd421925c9
  *
  */
