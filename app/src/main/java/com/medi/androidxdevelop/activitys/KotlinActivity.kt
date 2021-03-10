@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.medi.androidxdevelop.R
 import kotlinx.android.synthetic.main.activity_kotlin.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.File
 
 /**
@@ -70,12 +72,12 @@ import java.io.File
 
 class KotlinActivity : AppCompatActivity() {
     private var select = true
+    private lateinit var a :String//
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlin)
+        a = "null"
         init()
-
-
     }
 
     /**
@@ -92,15 +94,20 @@ class KotlinActivity : AppCompatActivity() {
 
         //with(T)函数，而另一个则是使用了T.run函数
         var c = with(tv_text){
+            6
         }
         //可以进行null判断
-        tv_text?.run {
-
+        var run = tv_text?.run {
+            8
         }
-
         //通过it取对象，如果我们不想覆盖外部作用域的this，这时候去使用T.let会更加的方便
-        tv_text?.let {
+        var let= tv_text?.let {
             print(it.text)
+            4
+        }
+        //自己作为返回值
+        val str = "abc"
+        var apply = str.apply {
         }
 
         //从上面两段代码可以看出T.let和T.also的返回值使不同的。T.let返回的是作用域中的最后一个对象，它的值和类型都可以改变
@@ -123,9 +130,7 @@ class KotlinActivity : AppCompatActivity() {
         }.also {
             println("The length of the String is ${it}") // "abc"
         }
-        original.apply {
 
-        }
 
     }
     //原始函数

@@ -15,7 +15,23 @@ import kotlinx.coroutines.launch
  * 一文搞懂Android JetPack组件原理之Lifecycle、LiveData、ViewModel与源码分析技巧
  *链接1：https://www.jianshu.com/p/03bd421925c9
  *
+ *
  */
+/* static State getStateAfter(Event event) {
+        switch (event) {
+            case ON_CREATE:
+            case ON_STOP:
+                return CREATED;
+            case ON_START:
+            case ON_PAUSE:
+                return STARTED;
+            case ON_RESUME:
+                return RESUMED;
+            case ON_DESTROY:
+                return DESTROYED;
+            case ON_ANY:
+                break;
+        }*/
 class MvvmActivity : BaseActivity() {
 
     private val viewModel: TestViewModel by lazy {

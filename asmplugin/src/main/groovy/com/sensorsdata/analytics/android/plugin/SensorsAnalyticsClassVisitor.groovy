@@ -102,7 +102,8 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
 
                 try {
                     String desc2 = (String) bsmArgs[0]
-                    SensorsAnalyticsMethodCell sensorsAnalyticsMethodCell = SensorsAnalyticsHookConfig.LAMBDA_METHODS.get(Type.getReturnType(desc1).getDescriptor() + name1 + desc2)
+                    SensorsAnalyticsMethodCell sensorsAnalyticsMethodCell = SensorsAnalyticsHookConfig
+                            .LAMBDA_METHODS.get(Type.getReturnType(desc1).getDescriptor() + name1 + desc2)
                     if (sensorsAnalyticsMethodCell != null) {
                         Handle it = (Handle) bsmArgs[1]
                         mLambdaMethodCells.put(it.name + it.desc, sensorsAnalyticsMethodCell)
@@ -113,7 +114,7 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
             }
 
             /**
-             * 在方法结束的时候处理这样不会影响到原有点击事件的响应速度
+             * 在方法结束的时候处理这样不会影响到原有点击事件的响应速度(重点标记)
              * @param opcode
              */
             @Override
@@ -171,6 +172,7 @@ class SensorsAnalyticsClassVisitor extends ClassVisitor implements Opcodes {
                     methodVisitor.visitMethodInsn(INVOKESTATIC, SDK_API_CLASS, "trackViewOnClick", "(Ljava/lang/Object;Landroid/view/MenuItem;)V", false)
                 }
 
+                //android：onclick属性绑定，通过自定义的注解实现方法插庄。
                 if (isSensorsDataTrackViewOnClickAnnotation) {
                     if (desc == '(Landroid/view/View;)V') {
                         methodVisitor.visitVarInsn(ALOAD, 1)

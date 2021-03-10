@@ -11,7 +11,7 @@ import leakcanary.AppWatcher
 /**
  * https://square.github.io/leakcanary/
  * https://mp.weixin.qq.com/s?__biz=MzA5ODQ1ODU5NA==&mid=2247484037&idx=1&sn=5745ee913af677fee192bac77507d418&chksm=90900c08a7e7851ec4bf6f2b3a9af3406c9ab78402722dc623409b949ad683c1d7aa084cca57&token=1449112143&lang=zh_CN#rd
- * Android 性能监控框架 Matrix（3）Hprof 文件分析
+ * Android 性能监控框架 Matrix（3）文件Hprof 分析
  * https://juejin.cn/post/6854573208520097799
  * 内部使用的堆文件分析器：
  * 1.堆文件分析器使用的库是haha（1.0版本）

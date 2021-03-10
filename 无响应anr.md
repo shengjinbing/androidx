@@ -24,10 +24,11 @@ BroadcastQueue Timeout：比如前台广播在10s内未执行完成
 ContentProvider Timeout：内容提供者,在publish过超时10s;
 InputDispatching Timeout: 输入事件分发超时5s，包括按键和触摸事件。
 
+重点总结：system_server 就是AMS具体实现在ActivityService里面，ActivityService是辅助AMS进行Service管理的类、
+        包含Service的启动、绑定和停止。
 1.埋炸弹 [-> ActiveServices.java]realStartServiceLocked方法中，发送delay消息(SERVICE_TIMEOUT_MSG). 炸弹已埋下,
  我们并不希望炸弹被引爆, 那么就需要在炸弹爆炸之前拆除炸弹.
 以Service的启动过程分析：
-
 private final void realStartServiceLocked(ServiceRecord r, ProcessRecord app, boolean execInFg) throws RemoteException {
     ...
     //发送delay消息(SERVICE_TIMEOUT_MSG)，【见小节2.1.2】
@@ -48,7 +49,7 @@ private final void realStartServiceLocked(ServiceRecord r, ProcessRecord app, bo
 
 private final void bumpServiceExecutingLocked(ServiceRecord r, boolean fg, String why) {
     ... 
-    //买炸弹是在onCreate()之前埋下的
+    //埋炸弹是在onCreate()之前埋下的
     scheduleServiceTimeoutLocked(r.app);
 }
 
@@ -95,8 +96,9 @@ ANR机制的设计与实现
   http://gityuan.com/2019/04/06/android-anr/
 4.第二类原理概述
 与组件类ANR不同的是，Input类型的超时机制并非时间到了一定就会爆炸，而是处理后续上报事件的过程才会去检测是否该爆炸，所以更像是 扫雷 的过程。
-什么叫做 扫雷 呢，对于 输入系统 而言，即使某次事件执行时间超过预期的时长，只要用户后续没有再生成输入事件，那么也不需要ANR。
-而只有当新一轮的输入事件到来，此时正在分发事件的窗口（即App应用本身）迟迟无法释放资源给新的事件去分发，这时InputDispatcher才会根据超时时间，动态的判断是否需要向对应的窗口提示ANR信息。
+什么叫做扫雷呢，对于输入系统而言，即使某次事件执行时间超过预期的时长，只要用户后续没有再生成输入事件，那么也不需要ANR。
+而只有当新一轮的输入事件到来，此时正在分发事件的窗口（即App应用本身）迟迟无法释放资源给新的事件去分发，这时InputDispatcher才会根据超时时间，
+动态的判断是否需要向对应的窗口提示ANR信息。
 这也正是用户在第一次点击屏幕，即使事件处理超时，也没有弹出ANR窗口，而当用户下意识再次点击屏幕时，屏幕上才提示出了ANR信息的原因。
 5.由此可见，组件类ANR和Input ANR原理上确实有所不同
 除此之外，前者是在ActivityManager线程中处理的ANR信息，后者则是在InputDispatcher线程中处理的ANR，这里通过一张图简单了
@@ -112,9 +114,6 @@ ANR机制的设计与实现
   并非所有「目标窗口还在处理上一个事件」都会抛出ANR，而是需要通过检测时间，如果未超时，那么直接中止本轮事件分发，反之，
   如果事件分发超时，那么才会确定ANR的发生。(重点)
   
-
-
-
 
 1.Android自身的 输入系统 又是什么？
 一言以蔽之，任何与Android设备的交互——我们称之为 输入事件，都需要通过 输入系统 进行管理和分发；
@@ -135,3 +134,6 @@ ANR机制的设计与实现
    (1是Input Dispatcher线程）。然而，如果用Binder实现的话，为了实现异步接收，每个应用程序需要两个线程，一个Binder线程，
    一个后台处理线程（不能在Binder线程里处理输入，因为这样太耗时，将会堵塞住发送端的调用线程）。在发送端，同样需要两个线程，
    一个发送线程，一个接收线程来接收应用的完成通知，所以，N个应用程序需要 2（N+1)个线程。相比之下，Socket还是高效多了。
+   
+
+        

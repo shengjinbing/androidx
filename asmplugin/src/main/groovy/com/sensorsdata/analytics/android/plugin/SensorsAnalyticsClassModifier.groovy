@@ -102,6 +102,7 @@ class SensorsAnalyticsClassModifier {
      * @return
      */
     protected static boolean isShouldModify(String className) {
+        //过滤特殊包名
         Iterator<String> iterator = exclude.iterator()
         while (iterator.hasNext()) {
             String packageName = iterator.next()
@@ -109,7 +110,7 @@ class SensorsAnalyticsClassModifier {
                 return false
             }
         }
-
+        //过滤类名
         if (className.contains('R$') ||
                 className.contains('R2$') ||
                 className.contains('R.class') ||
