@@ -171,6 +171,7 @@ dependencies {
     implementation "androidx.datastore:datastore:1.0.0-alpha06"
     implementation "com.google.protobuf:protobuf-javalite:3.10.0"
     implementation project(':common-protobuf')
+    implementation 'com.jeremyliao:live-event-bus-x:1.7.3'
 
 
 }

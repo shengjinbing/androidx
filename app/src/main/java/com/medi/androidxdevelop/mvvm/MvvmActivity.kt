@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.medi.androidxdevelop.R
 import com.medi.androidxdevelop.base.BaseActivity
 import com.medi.androidxdevelop.mvvm.life.TestLife
@@ -94,6 +95,7 @@ class MvvmActivity : BaseActivity() {
         fee.observe(this, Observer {
             tv_content.text = it.get(0).dictName
         })
+        //LiveEventBus
     }
 
     private fun testSwitchMap() {

@@ -2,11 +2,14 @@ package com.medi.androidxdevelop.activitys
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import com.medi.androidxdevelop.R
 import kotlinx.android.synthetic.main.activity_kotlin.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.File
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
 /**
  * kotlin
@@ -17,6 +20,11 @@ import java.io.File
  *   2.lateinit不能用在可空的属性上和java的基本类型上
  *   3.当属性用到的时候才会初始化”lazy{}”里面的内容
  *   4.而且再次调用属性的时候，只会得到结果，而不会再次执行lazy{}的运行过程
+ *   5.默认情况下，对于 lazy 属性的求值是同步锁的（synchronized）：该值只在一个线程中计算，并且所有线程会
+ *   看到相同的值。如果初始化委托的同步锁不是必需的，这样多个线程可以同时执行，那么将
+ *   LazyThreadSafetyMode.PUBLICATION 作为参数传递给 lazy() 函数。 而如果你确定初始化将总是发生在与
+ *   属性使用位于相同的线程， 那么可以使用 LazyThreadSafetyMode.NONE 模式：它不会有任何线程安全的保证以
+ *   及相关的开销。
  * 4.构造函数有哪几种
  *   1.主构造函数跟在类后面
  *   2.次构造函数不限
@@ -141,4 +149,44 @@ class KotlinActivity : AppCompatActivity() {
     }
     //通过let和also的链式调用改进后的函数
     fun makeDir1(path: String) = path.let{ File(it) }.also{ it.mkdirs() }
+}
+
+/********************委托***********************************/
+class ResourceDelegate<T> : ReadOnlyProperty<MyUI, T> {
+    override fun getValue(thisRef: MyUI, property: KProperty<*>): T {
+        return  "ss" as T
+    }
+}
+
+class ResourceLoader<T>(id: ResourceID<T>) {
+    operator fun provideDelegate(
+        thisRef: MyUI,
+        prop: KProperty<*>
+    ): ReadOnlyProperty<MyUI, T> {
+        checkProperty(thisRef, prop.name)
+        // 创建委托
+        return ResourceDelegate<T>()
+    }
+
+    private fun checkProperty(thisRef: MyUI, name: String) {
+
+    }
+}
+
+class MyUI {
+    private fun <T> bindResource(id: ResourceID<T>): ResourceLoader<T> {
+        return ResourceLoader(id)
+    }
+
+    val image by bindResource(ResourceID.image_id)
+    val text by bindResource(ResourceID.text_id)
+}
+
+class ResourceID<T>{
+    companion object{
+        var  image_id = ResourceID<String>()
+        var  text_id = ResourceID<String>()
+    }
+
+
 }
