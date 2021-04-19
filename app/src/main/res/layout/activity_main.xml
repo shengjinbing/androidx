@@ -62,7 +62,12 @@
         android:id="@+id/btn_xlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="kotlin"
+        android:text="xlog"
         />
-
+    <Button
+        android:id="@+id/btn_jobservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jobservice"
+        />
 </LinearLayout>

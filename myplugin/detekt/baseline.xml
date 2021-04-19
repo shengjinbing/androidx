@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>NewLineAtEndOfFile:MyPlugin.kt$com.medi.myplugin.MyPlugin.kt</ID>
+    <ID>NewLineAtEndOfFile:MyTast.kt$com.medi.myplugin.MyTast.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>

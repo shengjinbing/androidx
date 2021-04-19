@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>EmptyClassBlock:ActivityComponent.kt$ActivityComponent${ }</ID>
+    <ID>EmptyClassBlock:LoginRepository.kt$UserRepository${ }</ID>
+    <ID>EmptyClassBlock:LoginRetrofitService.kt$LoginRetrofitService${ }</ID>
+    <ID>EmptyClassBlock:SubcomponentsModule.kt$SubcomponentsModule${}</ID>
+    <ID>EmptyFunctionBlock:example.kt$Engine${}</ID>
+    <ID>ForbiddenComment:LoginPasswordFragment.kt$// TODO: Rename parameter arguments, choose names that match</ID>
+    <ID>ForbiddenComment:LoginPasswordFragment.kt$LoginPasswordFragment$// TODO: Rename and change types of parameters</ID>
+    <ID>ForbiddenComment:LoginPasswordFragment.kt$LoginPasswordFragment.Companion$// TODO: Rename and change types and number of parameters</ID>
+    <ID>ForbiddenComment:LoginUsernameFragment.kt$// TODO: Rename parameter arguments, choose names that match</ID>
+    <ID>ForbiddenComment:LoginUsernameFragment.kt$LoginUsernameFragment$// TODO: Rename and change types of parameters</ID>
+    <ID>ForbiddenComment:LoginUsernameFragment.kt$LoginUsernameFragment.Companion$// TODO: Rename and change types and number of parameters</ID>
+    <ID>FunctionOnlyReturningConstant:LoginRepository.kt$UserLocalDataSource$fun getUserLocalDataSource():Int</ID>
+    <ID>FunctionOnlyReturningConstant:LoginRepository.kt$UserRemoteDataSource$fun getUserRemoteDataSource():Int</ID>
+    <ID>FunctionOnlyReturningConstant:LoginViewModel.kt$LoginViewModel$fun getLoginViewModel():Int</ID>
+    <ID>NewLineAtEndOfFile:ActivityComponent.kt$com.medi.daggerdemo.di.component.ActivityComponent.kt</ID>
+    <ID>NewLineAtEndOfFile:ApplicationComponent.kt$com.medi.daggerdemo.di.component.ApplicationComponent.kt</ID>
+    <ID>NewLineAtEndOfFile:LoginActivity.kt$com.medi.daggerdemo.login.LoginActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:LoginComponent.kt$com.medi.daggerdemo.di.component.LoginComponent.kt</ID>
+    <ID>NewLineAtEndOfFile:LoginPasswordFragment.kt$com.medi.daggerdemo.login.LoginPasswordFragment.kt</ID>
+    <ID>NewLineAtEndOfFile:LoginRepository.kt$com.medi.daggerdemo.login.LoginRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:LoginRetrofitService.kt$com.medi.daggerdemo.login.LoginRetrofitService.kt</ID>
+    <ID>NewLineAtEndOfFile:LoginUsernameFragment.kt$com.medi.daggerdemo.login.LoginUsernameFragment.kt</ID>
+    <ID>NewLineAtEndOfFile:MyApplication.kt$com.medi.daggerdemo.base.MyApplication.kt</ID>
+    <ID>NewLineAtEndOfFile:NetworkModule.kt$com.medi.daggerdemo.di.module.NetworkModule.kt</ID>
+    <ID>NewLineAtEndOfFile:SubcomponentsModule.kt$com.medi.daggerdemo.di.module.SubcomponentsModule.kt</ID>
+    <ID>NewLineAtEndOfFile:example.kt$com.medi.daggerdemo.di.example.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>

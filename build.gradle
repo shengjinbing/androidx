@@ -11,6 +11,7 @@ buildscript {// 配置脚本的 classpath
         //本地的maven放在这
         maven { url uri('repo') }
     }
+
     dependencies {// 配置项目的依赖
         classpath 'com.android.tools.build:gradle:4.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -22,18 +23,67 @@ buildscript {// 配置脚本的 classpath
         classpath 'com.meituan.android.walle:plugin:1.1.6'
         //protobuf
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.14'
+        // 引入 detekt gradle plugin 插件,并指定版本
+        classpath 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.15.0'
     }
 }
+apply plugin: 'io.gitlab.arturbosch.detekt'
 //1、 buildscript里是gradle脚本执行所需依赖，分别是对应的maven库和插件
 //2、 allprojects里是项目本身需要的依赖，比如代码中某个类是打包到maven私有库中的，那么在allprojects—>repositories中需要配置maven私有库，而不是buildscript中，不然找不到。
 allprojects {// 配置项目及其子项目
     repositories {// 配置仓库地址，后面的依赖都会去这里配置的地址查找
         google()
         jcenter()
-        
     }
+}
+
+subprojects {
+    // detekt kotlin static analysis
+    apply plugin: 'io.gitlab.arturbosch.detekt'
+    tasks.detekt.jvmTarget="1.8"
+    detekt {
+        ignoreFailures = true
+        // a way of suppressing issues before introducing detekt
+        baseline = file("$projectDir/detekt/baseline.xml")
+        // println("detekt subprojects baseline:${baseline.absolutePath}")
+        reports {
+            // observe findings in your browser with structure and code snippets
+            html.enabled = true
+            // checkstyle like format mainly for integrations like Jenkins
+            xml.enabled = false
+            // similar to the console output, contains issue signature to manually edit baseline files
+            txt.enabled = false
+        }
+    }
+//    task cleanDetektBaseLine(type: Delete) {
+//        def path = file("$projectDir/detekt/baseline.xml")
+//        println "delete baseline path:$path"
+//        delete path
+//    }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+detekt {
+    // fail build on any finding
+    failFast = false
+    ignoreFailures = false
+    // preconfigure defaults
+    buildUponDefaultConfig = true
+    input = files(projectDir)// 指定需要扫描的源代码文件路径
+    // point to your custom config defining rules to run, overwriting default behavior
+    config = files("$projectDir/config/detekt/detekt.yml")// 指定采用的规则集文件
+    baseline = file("$projectDir/config/detekt/baseline.xml")
+    // this version not support this filed
+    // filters = ".*/test/.*, .*/resources/.*, .*/build/.*"
+    reports {
+        // observe findings in your browser with structure and code snippets
+        html.enabled = true
+        // checkstyle like format mainly for integrations like Jenkins
+        xml.enabled = false
+        // similar to the console output, contains issue signature to manually edit baseline files
+        txt.enabled = false
+    }
 }

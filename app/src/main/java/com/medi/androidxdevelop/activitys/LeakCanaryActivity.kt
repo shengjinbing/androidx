@@ -91,8 +91,9 @@ class LeakCanaryActivity : AppCompatActivity() {
         with(ArrayList<String>()){
 
         }
-        arrayList.let {
-
+        var a:Int=1
+        arrayList.let{
+            a = 5
         }
 
 

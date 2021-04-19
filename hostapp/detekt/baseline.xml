@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>EmptyDefaultConstructor:MainActivity.kt$MainActivity$()</ID>
+    <ID>NewLineAtEndOfFile:StubActivity.kt$com.medi.hostapp.activitys.StubActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:TestActivity.kt$com.medi.hostapp.activitys.TestActivity.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>

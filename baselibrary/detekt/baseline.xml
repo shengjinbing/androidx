@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>NewLineAtEndOfFile:HiDataBus.kt$com.medi.baselibrary.eventbus.HiDataBus.kt</ID>
+    <ID>WildcardImport:HiDataBus.kt$import androidx.lifecycle.*</ID>
+  </CurrentIssues>
+</SmellBaseline>

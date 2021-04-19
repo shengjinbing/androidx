@@ -1,0 +1,141 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>EmptyCatchBlock:SpHook.kt$SpBlockHelper.Companion${ }</ID>
+    <ID>EmptyClassBlock:SingleInstance.kt$Helper${ }</ID>
+    <ID>EmptyFunctionBlock:ASMTestActivity.kt$ASMTestActivity.&lt;no name provided&gt;${ }</ID>
+    <ID>EmptyFunctionBlock:KotlinActivity.kt$ResourceLoader${ }</ID>
+    <ID>EmptyFunctionBlock:MvvmActivity.kt$MvvmActivity${ }</ID>
+    <ID>EmptyFunctionBlock:TrustAllCerts.kt$TrustAllCerts${ }</ID>
+    <ID>EmptyFunctionBlock:XLogActivity.kt$XLogActivity${ }</ID>
+    <ID>ForbiddenComment:LoginDataSource.kt$LoginDataSource$// TODO: handle loggedInUser authentication</ID>
+    <ID>ForbiddenComment:LoginDataSource.kt$LoginDataSource$// TODO: revoke authentication</ID>
+    <ID>FunctionOnlyReturningConstant:LoginRepository.kt$LoginRepository$//从h缓存中获取数据 fun getUserNameFormCache():String</ID>
+    <ID>FunctionOnlyReturningConstant:NetworkUtils.kt$NetworkUtils$fun isConnected():Boolean</ID>
+    <ID>MagicNumber:AppViewScreenActivity.kt$AppViewScreenActivity$100</ID>
+    <ID>MagicNumber:AsyncTaskActivity.kt$AsyncTaskActivity.MyTask$50</ID>
+    <ID>MagicNumber:AsyncTaskActivity.kt$AsyncTaskActivity.MyTask$99</ID>
+    <ID>MagicNumber:BlockCanaryActivity.kt$BlockCanaryActivity$2000</ID>
+    <ID>MagicNumber:CoroutinesActivity.kt$CoroutinesActivity$10</ID>
+    <ID>MagicNumber:CoroutinesActivity.kt$CoroutinesActivity$1000L</ID>
+    <ID>MagicNumber:CoroutinesActivity.kt$CoroutinesActivity$20</ID>
+    <ID>MagicNumber:CoroutinesActivity.kt$CoroutinesActivity$200</ID>
+    <ID>MagicNumber:CoroutinesActivity.kt$CoroutinesActivity$40</ID>
+    <ID>MagicNumber:CoroutinesActivity.kt$CoroutinesActivity$5</ID>
+    <ID>MagicNumber:CoroutinesActivity.kt$CoroutinesActivity$5000</ID>
+    <ID>MagicNumber:KotlinActivity.kt$KotlinActivity$4</ID>
+    <ID>MagicNumber:KotlinActivity.kt$KotlinActivity$6</ID>
+    <ID>MagicNumber:KotlinActivity.kt$KotlinActivity$8</ID>
+    <ID>MagicNumber:LeakCanaryActivity.kt$LeakCanaryActivity$5</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$10000</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$100000</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$2027</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$2032</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$3037</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$3041</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$3047</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$3050</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$3052</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$3093</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$3094</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$5003</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$5100</ID>
+    <ID>MagicNumber:NetException.kt$NetExceptionCode$9998</ID>
+    <ID>MagicNumber:ProgressWorker.kt$ProgressWorker$100</ID>
+    <ID>MagicNumber:RESTFulService.kt$30</ID>
+    <ID>MagicNumber:SpHook.kt$McallbackMock$115</ID>
+    <ID>MagicNumber:SpHook.kt$McallbackMock$116</ID>
+    <ID>MagicNumber:SpHook.kt$McallbackMock$137</ID>
+    <ID>MagicNumber:SpHook.kt$McallbackMock$159</ID>
+    <ID>MagicNumber:Tls12.kt$16</ID>
+    <ID>MagicNumber:Tls12.kt$21</ID>
+    <ID>MagicNumber:TrustAllCerts.kt$TrustAllCerts$16</ID>
+    <ID>MagicNumber:WorkActivity.kt$WorkActivity$10</ID>
+    <ID>MatchingDeclarationName:TestViewMolde.kt$TestViewModel : ViewModel</ID>
+    <ID>MaxLineLength:AppViewScreenActivity.kt$AppViewScreenActivity$PERMISSIONS_REQUEST_READ_CONTACTS</ID>
+    <ID>MaxLineLength:CoroutinesActivity.kt$CoroutinesActivity$除了 launch，还有一个方法跟它很像，就是 async，它的作用是创建一个协程，之后返回一个 Deferred&lt;T&gt;对象，我们可以调用 Deferred#await()去获取返回的值，有点类似于 Java 中的 Future</ID>
+    <ID>MaxLineLength:LeakCanaryActivity.kt$LeakCanaryActivity$Service	Hook H的mCallback实现，当消息为STOP_SERVICE时，从ActivityThread中的mServices获取	Hook ActivityManagerService，serviceDoneExecuting中检测</ID>
+    <ID>MaxLineLength:RESTFulService.kt$val</ID>
+    <ID>MaxLineLength:SignParamsInterceptor.kt$SignParamsInterceptor$private</ID>
+    <ID>MaxLineLength:TrustAllCerts.kt$TrustAllCerts.Companion$private const val PUB_KEY = "30820122300d06092a864886f70d01010105000382010f003082010a0282010100bc523d3c9a3384c73b20e64e7fe77902aba732da2564b521dd98b399fad3816ab80e316c7b56f7d8d8a564914cbf7ff4b4855132b1a01535a9deb829bc212d9782751fbdee0e5ea1ba474c1abe222d3e49f475db0cc67e7dc2e52503d83e3ab6e323418a7798d102811c71afc83f99f40c8a51fb783e5815907dba7a199acfba3203b9559e58bef5273c2c55b178b4b58f0e04a38b0a8afa634b9977bd92e5f7b7c94a9e7cf0c5706deda8120b1858d446ea874274a54a4e352b02c98374b899c7d12db2d8f59f19762bd2db878276dce150ae6378b2a3095c582f3f8492ad434057505e801da08d48f227e116c61412f2242ec754e60b54f950d706141fe4a90203010001"</ID>
+    <ID>MaxLineLength:TrustAllCerts.kt$TrustAllCerts.Companion$private const val PUB_KEY_NEW = "30820122300d06092a864886f70d01010105000382010f003082010a0282010100efc113a3c19fb90f97b2f59b709b85da091ef88c6b22ef2cf1b0026584074cf68928c59392929637367692463811ae500a890a3692154c30bb85f4561130be7e8f5637d56d8f7ee80abbce3c74235205660d73da648f4d84b6b5f851fb88429f8d6dd97445bfde81aff73abe3acefd16f89fd1168193a57619c17f86159ba1b5d89033b345ef9ffea1057ffe82b4ed7106a6257aba468cea8e66624cef046bc249e0c3fd3dffb48fb37eda8ba62042d356fe1a387340b979a2c9b304ebfb41abced0e5d828b13b70fcbdf51ebb7ca65adc4b0a51da750b258d6afde54c9d213e1d79802cc6f060a1fd58fea43a220671ce8acdce669f664337c4a1e90a82d7670203010001"</ID>
+    <ID>MaxLineLength:XLogActivity.kt$XLogActivity$*</ID>
+    <ID>NewLineAtEndOfFile:ASMTestActivity.kt$com.medi.androidxdevelop.activitys.ASMTestActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:ApplicationContext.kt$com.medi.androidxdevelop.base.ApplicationContext.kt</ID>
+    <ID>NewLineAtEndOfFile:BaseActivity.kt$com.medi.androidxdevelop.base.BaseActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:BaseApplication.kt$com.medi.androidxdevelop.base.BaseApplication.kt</ID>
+    <ID>NewLineAtEndOfFile:BaseResponse.kt$com.medi.androidxdevelop.mvvm.entity.BaseResponse.kt</ID>
+    <ID>NewLineAtEndOfFile:BlockCanaryActivity.kt$com.medi.androidxdevelop.activitys.BlockCanaryActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:CoroutinesActivity.kt$com.medi.androidxdevelop.activitys.CoroutinesActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:CustomDelegateTool.kt$com.medi.androidxdevelop.utils.sp.CustomDelegateTool.kt</ID>
+    <ID>NewLineAtEndOfFile:CustomGsonConverterFactory.kt$com.medi.comm.network.result.CustomGsonConverterFactory.kt</ID>
+    <ID>NewLineAtEndOfFile:CustomGsonRequestBodyConverter.kt$com.medi.comm.network.result.CustomGsonRequestBodyConverter.kt</ID>
+    <ID>NewLineAtEndOfFile:CustomGsonResponseBodyConverter.kt$com.medi.comm.network.result.CustomGsonResponseBodyConverter.kt</ID>
+    <ID>NewLineAtEndOfFile:DataBindingActivity.kt$com.medi.androidxdevelop.mvvm.DataBindingActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:FeeEntity.kt$com.medi.androidxdevelop.mvvm.entity.FeeEntity.kt</ID>
+    <ID>NewLineAtEndOfFile:HeapDump.kt$com.medi.androidxdevelop.leakcanary.HeapDump.kt</ID>
+    <ID>NewLineAtEndOfFile:ImageActivity.kt$com.medi.androidxdevelop.activitys.ui.ImageActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:KotlinActivity.kt$com.medi.androidxdevelop.activitys.KotlinActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:LifecycleActivity.kt$com.medi.androidxdevelop.mvvm.LifecycleActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:LoggedInUser.kt$com.medi.androidxdevelop.activitys.data.model.LoggedInUser.kt</ID>
+    <ID>NewLineAtEndOfFile:LoginDataSource.kt$com.medi.androidxdevelop.activitys.data.LoginDataSource.kt</ID>
+    <ID>NewLineAtEndOfFile:LoginRepository.kt$com.medi.androidxdevelop.activitys.data.LoginRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:LoginRepository.kt$com.medi.androidxdevelop.mvvm.repository.LoginRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:MmapHelper.kt$com.medi.androidxdevelop.utils.mmap.MmapHelper.kt</ID>
+    <ID>NewLineAtEndOfFile:MockInterceptor.kt$com.medi.comm.network.interceptor.MockInterceptor.kt</ID>
+    <ID>NewLineAtEndOfFile:NetworkUtils.kt$com.medi.androidxdevelop.network.NetworkUtils.kt</ID>
+    <ID>NewLineAtEndOfFile:Preference.kt$com.medi.androidxdevelop.utils.sp.Preference.kt</ID>
+    <ID>NewLineAtEndOfFile:ProgressWorker.kt$com.medi.androidxdevelop.mvvm.work.ProgressWorker.kt</ID>
+    <ID>NewLineAtEndOfFile:Result.kt$com.medi.androidxdevelop.activitys.data.Result.kt</ID>
+    <ID>NewLineAtEndOfFile:ResultIntercept.kt$com.medi.comm.network.result.ResultIntercept.kt</ID>
+    <ID>NewLineAtEndOfFile:RetrofitCallback.kt$com.medi.comm.network.callback.RetrofitCallback.kt</ID>
+    <ID>NewLineAtEndOfFile:SendLogsWorker.kt$com.medi.androidxdevelop.mvvm.work.SendLogsWorker.kt</ID>
+    <ID>NewLineAtEndOfFile:SignParamsInterceptor.kt$com.medi.comm.network.interceptor.SignParamsInterceptor.kt</ID>
+    <ID>NewLineAtEndOfFile:SpHook.kt$com.medi.androidxdevelop.utils.sp.SpHook.kt</ID>
+    <ID>NewLineAtEndOfFile:StockLiveData.kt$com.medi.androidxdevelop.mvvm.livedata.StockLiveData.kt</ID>
+    <ID>NewLineAtEndOfFile:TestLife.kt$com.medi.androidxdevelop.mvvm.life.TestLife.kt</ID>
+    <ID>NewLineAtEndOfFile:TestViewMolde.kt$com.medi.androidxdevelop.mvvm.TestViewMolde.kt</ID>
+    <ID>NewLineAtEndOfFile:Tls12.kt$com.medi.comm.network.ssl.Tls12.kt</ID>
+    <ID>NewLineAtEndOfFile:Tls12SocketFactory.kt$com.medi.comm.network.ssl.Tls12SocketFactory.kt</ID>
+    <ID>NewLineAtEndOfFile:UploadWorker.kt$com.medi.androidxdevelop.mvvm.work.UploadWorker.kt</ID>
+    <ID>NewLineAtEndOfFile:User.kt$com.medi.androidxdevelop.mvvm.entity.User.kt</ID>
+    <ID>NewLineAtEndOfFile:WorkActivity.kt$com.medi.androidxdevelop.mvvm.WorkActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:XLogActivity.kt$com.medi.androidxdevelop.activitys.ui.XLogActivity.kt</ID>
+    <ID>ReturnCount:SignParamsInterceptor.kt$SignParamsInterceptor$private fun bodyToString(request: RequestBody?): String</ID>
+    <ID>TooGenericExceptionCaught:CoroutinesExt.kt$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:LoginDataSource.kt$LoginDataSource$e: Throwable</ID>
+    <ID>TooGenericExceptionCaught:MmapHelper.kt$MmapHelper$e: Throwable</ID>
+    <ID>TooGenericExceptionCaught:NetException.kt$NetException$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:SpHook.kt$SpBlockHelper.Companion$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:SpHook.kt$SpHook.Companion$t: Throwable</ID>
+    <ID>TooGenericExceptionCaught:Tls12.kt$exc: Exception</ID>
+    <ID>TooGenericExceptionCaught:TrustAllCerts.kt$TrustAllCerts$e: Exception</ID>
+    <ID>UtilityClassWithPublicConstructor:ApplicationContext.kt$ApplicationContext</ID>
+    <ID>UtilityClassWithPublicConstructor:HeapDump.kt$HeapDump</ID>
+    <ID>UtilityClassWithPublicConstructor:KotlinActivity.kt$ResourceID&lt;T&gt;</ID>
+    <ID>UtilityClassWithPublicConstructor:SpHook.kt$SpBlockHelper</ID>
+    <ID>UtilityClassWithPublicConstructor:SpHook.kt$SpHook</ID>
+    <ID>VariableNaming:AppViewScreenActivity.kt$AppViewScreenActivity$private val PERMISSIONS_REQUEST_READ_CONTACTS = 100</ID>
+    <ID>VariableNaming:BlockCanaryActivity.kt$BlockCanaryActivity$private val TAG:String = "BlockCanary_log"</ID>
+    <ID>VariableNaming:CoroutinesActivity.kt$CoroutinesActivity$val TAG: String = "Coroutines_log"</ID>
+    <ID>VariableNaming:CustomGsonRequestBodyConverter.kt$CustomGsonRequestBodyConverter$private val MEDIA_TYPE = "application/json; charset=UTF-8".toMediaTypeOrNull()</ID>
+    <ID>VariableNaming:CustomGsonRequestBodyConverter.kt$CustomGsonRequestBodyConverter$private val UTF_8 = Charset.forName("UTF-8")</ID>
+    <ID>VariableNaming:LeakUploader.kt$LeakUploader$private val TAG: String = "LeakUploader"</ID>
+    <ID>VariableNaming:SpHook.kt$McallbackMock$private val SERVICE_ARGS = 115</ID>
+    <ID>VariableNaming:SpHook.kt$McallbackMock$private val SLEEPING = 137</ID>
+    <ID>VariableNaming:SpHook.kt$McallbackMock$private val STOP_SERVICE = 116</ID>
+    <ID>VariableNaming:SpHook.kt$McallbackMock$val EXECUTE_TRANSACTION = 159//状态模式，统一走这</ID>
+    <ID>VariableNaming:TestLife.kt$TestLife$private val TAG = "Lifecycle"</ID>
+    <ID>VariableNaming:XLogActivity.kt$XLogActivity$lateinit var EXAMPLE_COUNTER:Preferences.Key&lt;Int&gt;</ID>
+    <ID>WildcardImport:BaseActivity.kt$import kotlinx.coroutines.*</ID>
+    <ID>WildcardImport:BlockCanaryActivity.kt$import android.os.*</ID>
+    <ID>WildcardImport:CoroutinesActivity.kt$import kotlinx.coroutines.*</ID>
+    <ID>WildcardImport:CoroutinesActivity.kt$import kotlinx.coroutines.flow.*</ID>
+    <ID>WildcardImport:MainActivity.kt$import com.medi.androidxdevelop.activitys.*</ID>
+    <ID>WildcardImport:MvvmActivity.kt$import androidx.lifecycle.*</ID>
+    <ID>WildcardImport:SignParamsInterceptor.kt$import okhttp3.*</ID>
+    <ID>WildcardImport:TrustAllCerts.kt$import javax.net.ssl.*</ID>
+    <ID>WildcardImport:WorkActivity.kt$import androidx.work.*</ID>
+  </CurrentIssues>
+</SmellBaseline>

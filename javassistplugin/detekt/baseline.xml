@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>ComplexCondition:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$!filePath.contains("R$") &amp;&amp; !filePath.contains("R2$") &amp;&amp; !filePath.contains("R.class") &amp;&amp; !filePath.contains("R2.class") &amp;&amp; !filePath.contains("BuildConfig.class")</ID>
+    <ID>ComplexMethod:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$private fun injectClass(classFile: File, path: String)</ID>
+    <ID>LongMethod:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$private fun injectClass(classFile: File, path: String)</ID>
+    <ID>MagicNumber:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$1024</ID>
+    <ID>MagicNumber:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$6</ID>
+    <ID>MagicNumber:SensorsAnalyticsTransform.kt$SensorsAnalyticsTransform$4</ID>
+    <ID>MagicNumber:SensorsAnalyticsTransform.kt$SensorsAnalyticsTransform$8</ID>
+    <ID>MaxLineLength:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$*</ID>
+    <ID>MaxLineLength:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$for</ID>
+    <ID>MaxLineLength:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$if</ID>
+    <ID>MaxLineLength:SensorsAnalyticsTransform.kt$SensorsAnalyticsTransform$var dest = outputProvider.getContentLocation(destName + hexName, it.contentTypes, it.scopes, Format.JAR)</ID>
+    <ID>NestedBlockDepth:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$private fun injectClass(classFile: File, path: String)</ID>
+    <ID>NestedBlockDepth:SensorsAnalyticsTransform.kt$SensorsAnalyticsTransform$override fun transform(transformInvocation: TransformInvocation?)</ID>
+    <ID>NewLineAtEndOfFile:SensorsAnalyticsInject.kt$com.sensorsdata.analytics.javassist.plugin.SensorsAnalyticsInject.kt</ID>
+    <ID>NewLineAtEndOfFile:SensorsAnalyticsPlugin.kt$com.sensorsdata.analytics.javassist.plugin.SensorsAnalyticsPlugin.kt</ID>
+    <ID>NewLineAtEndOfFile:SensorsAnalyticsTransform.kt$com.sensorsdata.analytics.javassist.plugin.SensorsAnalyticsTransform.kt</ID>
+    <ID>TooGenericExceptionCaught:SensorsAnalyticsInject.kt$SensorsAnalyticsInject.Companion$e: Exception</ID>
+    <ID>UtilityClassWithPublicConstructor:SensorsAnalyticsInject.kt$SensorsAnalyticsInject</ID>
+  </CurrentIssues>
+</SmellBaseline>

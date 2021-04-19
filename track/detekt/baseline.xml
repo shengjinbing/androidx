@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>NewLineAtEndOfFile:TrackApplication.kt$com.medi.track.TrackApplication.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>

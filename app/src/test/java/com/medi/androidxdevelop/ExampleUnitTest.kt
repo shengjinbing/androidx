@@ -545,4 +545,19 @@ class ExampleUnitTest {
         val age: Int     by map
     }
 
+    @Test
+    fun mainTest19(){
+        var coordinateList = arrayListOf<Pair<Int,Int>>()
+        coordinateList.add(Pair(1,2))
+        coordinateList.add(Pair(3,4))
+        var tempCoordinateList = arrayListOf<Pair<Int,Int>>()
+        tempCoordinateList.add(coordinateList[0])
+        tempCoordinateList.add(coordinateList[1])
+        coordinateList.removeAt(0)
+        /*println("${coordinateList[0].first}${coordinateList[0].second}" +
+                "${coordinateList[1].first}${coordinateList[1].second}")*/
+        println("${tempCoordinateList[0].first}${tempCoordinateList[0].second}" +
+                "${tempCoordinateList[1].first}${tempCoordinateList[1].second}")
+    }
+
 }
