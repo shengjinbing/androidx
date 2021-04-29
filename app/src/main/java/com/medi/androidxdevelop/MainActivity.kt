@@ -68,5 +68,8 @@ class MainActivity : AppCompatActivity() {
             val scheduler = this.getSystemService(JobScheduler::class.java)
             scheduler.schedule(myJob)
         }
+        btn_view.setOnClickListener {
+            startActivity(Intent(this, ViewsActivity::class.java))
+        }
     }
 }
